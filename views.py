@@ -14,5 +14,7 @@ def home():
 
 @views.route("/artist")
 def artist():
-    
-    return render_template("index.html", your_list= test)
+    args = request.args
+    artistName = args.get('txtArtistName')
+    return render_template("index.html", your_list= test, txtArtistName = artistName)
+
