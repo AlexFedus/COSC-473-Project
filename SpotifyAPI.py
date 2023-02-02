@@ -4,6 +4,7 @@ import base64
 from requests import post, get
 import json
 
+
 load_dotenv()
 
 client_id = os.getenv("CLIENT_ID")
@@ -51,7 +52,7 @@ def get_songs_by_artist(token, artist_id):
 
 
 token = get_token()
-result = search_for_artist(token, "ACDC")
+result = search_for_artist(token, "Drake")
 artist_id = result["id"]
 songs = get_songs_by_artist(token, artist_id)
 

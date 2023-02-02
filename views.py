@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from SpotifyAPI import songs
 test = []
 
@@ -9,6 +9,10 @@ for idx, song in enumerate(songs):
 views = Blueprint(__name__,"views")
 
 @views.route("/")
-
 def home():
+    return render_template("index.html", your_list= test)
+
+@views.route("/artist")
+def artist():
+    
     return render_template("index.html", your_list= test)

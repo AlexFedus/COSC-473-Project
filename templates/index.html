@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Top Songs</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='topten/index.css')}}">
 </head>
 <body>
     <div>
-        <h1>Home Page</h1>
+        <image src="{{ url_for('static', filename='images/Spotifyicon.png')}}">
+        <h1>Top 10 Songs</h1>
+        <p>Artist Name:</p>
+        <input type="text" artistinput="txtArtistName"id="txtArtistName" value="" placeholder="Enter Your Favorite Artist"/>
+        <h1>US top songs</h1>
         {% for your_list_element in your_list %}
       <p>{{ your_list_element }} </p>
 {% endfor %}
