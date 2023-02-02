@@ -3,7 +3,7 @@ import os
 import base64
 from requests import post, get
 import json
-
+from views import testArtist
 
 load_dotenv()
 
@@ -52,9 +52,11 @@ def get_songs_by_artist(token, artist_id):
 
 
 token = get_token()
-result = search_for_artist(token, "Drake")
+result = search_for_artist(token, testArtist)
 artist_id = result["id"]
 songs = get_songs_by_artist(token, artist_id)
+
+
 
 for idx, song in enumerate(songs):
     print(f"{idx + 1}. {song['name']}")
