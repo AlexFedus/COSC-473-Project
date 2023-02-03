@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, url_for, redirect
 from SpotifyAPI import getartisttopten
 
 test = []
@@ -12,9 +12,20 @@ views = Blueprint(__name__,"views")
 def home():
     return render_template("home.html")
 
-@views.route("/login")
+@views.route("/login", methods=["POST", "GET"])
 def login():
-    return render_template("login.html")
+    if request.method == "POST":
+        user = request.form["nm"]
+        print(user)
+        return render_template("login.html")
+        #return redirect(url_for("user", usr = user))
+    else:
+        return render_template("login.html")
+    
+
+@views.route("/<usr>")
+def user(usr):
+    return f"<h1>{views.usr}</h1>"
 
 @views.route("/artist", methods =["GET", "POST"])
 def artist():

@@ -1,0 +1,4 @@
+.header {
+  background-image: url("{{ url_for('static', filename='images/headerbackground.png') }}");
+  background-size: cover;
+}
