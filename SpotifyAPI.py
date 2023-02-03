@@ -10,6 +10,8 @@ load_dotenv()
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 
+defaultArtist = "Drake"
+
 def get_token():
     auth_string = client_id + ":" + client_secret
     auth_bytes = auth_string.encode("utf-8")
@@ -52,7 +54,7 @@ def get_songs_by_artist(token, artist_id):
 
 
 token = get_token()
-result = search_for_artist(token, "Drake")
+result = search_for_artist(token, defaultArtist)
 artist_id = result["id"]
 songs = get_songs_by_artist(token, artist_id)
 
