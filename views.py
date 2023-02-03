@@ -8,9 +8,9 @@ for idx, song in enumerate(songs):
 
 views = Blueprint(__name__,"views")
 
-@views.route("/")
+@views.route("/home")
 def home():
-    return render_template("index.html", your_list= test)
+    return render_template("home.html")
 
 @views.route("/artist")
 def artist():
