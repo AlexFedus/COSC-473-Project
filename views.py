@@ -12,6 +12,10 @@ views = Blueprint(__name__,"views")
 def home():
     return render_template("home.html")
 
+@views.route("/login")
+def login():
+    return render_template("login.html")
+
 @views.route("/artist", methods =["GET", "POST"])
 def artist():
     if request.method == "POST":
