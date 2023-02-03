@@ -79,6 +79,14 @@ views = Blueprint(__name__,"views")
 def home():
     return render_template("home.html")
 
+@app.route("/login", methods=["POST", "GET"])
+def login():
+    return render_template()
+
+@app.route("/<usr>")
+def user(usr):
+    return f"<h1>{usr}</h1>"
+
 @views.route("/artist")
 def artist():
     args = request.args
