@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='homepage/home.css')}}">
+    <link href='https://fonts.googleapis.com/css?family=Bungee Shade' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Home - Spotify Song Recommender</title>
+
+
+
+    <style>
+       body {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-image: url("{{ url_for('static', filename='images/homebackground.png') }}");
+        font-family: 'Bungee Shade';
+        font-size: 22px;
+        
+       } 
+       h1{
+        position:fixed;
+       }
+
+       
+       .toptenbutton{
+        top:1000px;
+       left:60%;
+       width:400px;
+       height:80px;
+       position: absolute;
+       z-index: 2;
+       background-color: green;  
+       border: 0ch;
+       border-radius: 50px;
+       cursor: pointer;
+       text-align: center;
+       font-size: 20px;
+       padding: 20px;
+       
+       }
+
+       .toptenbutton span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+       }
+
+       .toptenbutton span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -10px;
+        transition: 0.5s;
+       }
+
+       .toptenbutton:hover span{
+        
+        padding-right: 25px;
+       }
+
+       .toptenbutton:hover span:after{
+        
+        opacity: 1;
+        right: 0;
+       }
+
+       .toptenbutton:hover{
+        background: rgba(47, 255, 75, 0.733);
+       }
+
+       .loginbutton{
+        top:1000px;
+       left:26%;
+       width:400px;
+       height:80px;
+       position: absolute;
+       z-index: 2;
+       background-color: green;  
+       border: 0ch;
+       border-radius: 50px;
+       cursor: pointer;
+       text-align: center;
+       font-size: 20px;
+       padding: 20px;
+       
+       }
+       .loginbutton span{
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+       }
+       .loginbutton span:after{
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -10px;
+        transition: 0.5s;
+       }
+       .loginbutton:hover{
+        background: rgba(47, 255, 75, 0.733);
+        
+       }
+
+       .loginbutton:hover span{
+        padding-right: 25px;
+       }
+       .loginbutton:hover span:after{
+        opacity: 1;
+        right: 0;
+       }
+
+       .homeTitle{
+        
+        top:390px;
+       left:880px;
+       width:1000px;
+       height:40px;
+       position: relative;
+       font: optional;
+       }
+
+       
+       
+    </style>
+</head>
+<body>
+    
+
+    
+    <h1 class = "homeTitle">Spotify Song Recommender</h1>
+    <button onclick="window.location.href='/artist'" class="toptenbutton"><span>
+        Top Ten Songs for Artists
+    </span></button>
+    <button onclick="window.location.href='/login'" class="loginbutton"><span>
+        Login
+    </span></button>
+
+    
+</body>
+</html>
