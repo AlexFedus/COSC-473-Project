@@ -2,12 +2,18 @@
 <html>
     <head>
         <title>{% block title %}{% endblock %}</title>
-        </head>
-        <body>
-            <h1>Spotify Song Recommender</h1>
-            {% block content %}
-            
-            {% endblock %}
-        </body>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='homepage/login.css')}}">
+        <link rel="icon" type="image/gif" href="{{ url_for('static', filename='images/Spotifyicon.png')}}"">
+        <link rel="icon" type="image/gif" href="{{ url_for('static', filename='images/Spotifyicon.png')}}"">
+    </head>
+    <body>
+        <h1>Spotify Song Recommender</h1>
+        <h3> Spotify Login</h3>
+        {% block content %}
+        
+        {% endblock %}
+        
+        
+    </body>
     
 </html>
