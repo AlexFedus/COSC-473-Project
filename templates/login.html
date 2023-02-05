@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='homepage/login.css')}}">
+{% block title %}Login Page{% endblock %}
+
+  {% block content %}
+  <form action="#" method="post">
+      <p Name:></p>
+      <p>Email: <input type="email" name="nm"/></p>
+      <p>Password: <input type="password" name="password"/></p>
+      <p style="text-indent: 7%;"><input type="submit" value="Sign In"/></p>
+  </form>
+
+  <br>
+  
+  <h3>Back Home</h3>
+  <p style="text-indent: 4%;">
+    <button onclick="window.location.href='/'">
+      Home
+    </button>
+  </p>
+
+  {% endblock %}
+
+
