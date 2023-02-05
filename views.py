@@ -23,9 +23,9 @@ def login():
         return render_template("login.html")
     
 
-@views.route("/<usr>")
-def user(usr):
-    return f"<h1>{views.usr}</h1>"
+#@views.route("/<usr>")
+#def user(usr):
+    #return f"<h1>{views.usr}</h1>"
 
 @views.route("/artist", methods =["GET", "POST"])
 def artist():
