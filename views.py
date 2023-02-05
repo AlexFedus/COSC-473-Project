@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, url_for, redirect
-from SpotifyAPI import getartisttopten
+from SpotifyAPI import getartisttopten, get_login
 
 test = []
 
@@ -15,10 +15,14 @@ def home():
 @views.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
-        user = request.form["nm"]
-        print(user)
+        user = request.form.get["em"]
+        password = request.form.get["pw"]
+        #print(user)
         return render_template("login.html")
         #return redirect(url_for("user", usr = user))
+
+        users = get_login(user)
+        passwords = get_login(password)
     else:
         return render_template("login.html")
     
