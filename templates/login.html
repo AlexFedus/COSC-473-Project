@@ -1,15 +1,55 @@
-{% extends "base.html" %}
-{% block title %}Login Page{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Page</title>
+        
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login/login.css')}}">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        </head>
+        <body>
+            
+            <header>
+                <div class = "container">
+                    <h3> SSR - Spotify Song Recommender </h3>
+                    <ul>
+                        <li><a onclick="window.location.href='/'">Home</a></li>
+                        <li><a onclick="window.location.href='/login'">Login</a></li>
+                        <li><a onclick="window.location.href='/artist'">Top Ten</a></li>
+                        
+                      </ul>
+                </div>
+              </header>
+            
+            <h1>Spotify Song Recommender</h1>
+            
+            
+            
+            
+            
 
-{% block content %}
-<button onclick="window.location.href='/'">
-    Home
-  </button>
+            <div class="login-box">
+              <p>Login</p>
+              <form>
+                <div class="user-box">
+                  <input required="" name="nm" type="text">
+                  <label>Email</label>
+                </div>
+                <div class="user-box">
+                  <input required="" name="pw" type="password">
+                  <label>Password</label>
+                </div>
+                <a href="#">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  Submit
+                </a>
+              </form>
+              <p>Don't have an account? <a href="" class="a2">Sign up!</a></p>
+            </div>
 
-<form action="#" method="post">
-    <p Name:></p>
-    <p><input type="text" name="nm"/></p>
-    <p><input type="submit" value="submit"/></p>
-</form>
 
-{% endblock %}
+        </body>
+    
+</html>
