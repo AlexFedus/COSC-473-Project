@@ -1,14 +1,76 @@
 .header {
   background-image: url("{{ url_for('static', filename='images/headerbackground.png') }}");
   background-size: cover;
+  
 }
+
+.threelines{
+  position: relative;
+  margin: auto;
+  max-width: 500px; 
+  size: 15px;
+  padding: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+ /* Nav bar */
+ ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.container{
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 7vh;
+  background-color: #24252B;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 3px 5px 5px rgb(0, 0, 0, 0.4);
+}
+
+ul,li {
+  list-style: none;
+  display: flex;
+  padding: 1em;
+  margin: 0;
+}
+
+li {
+  cursor: pointer;
+  transition: all .5 ease-in-out;
+  margin: 0.5em;
+  padding: 10px 15px;
+  color: whitesmoke;
+  border-radius: 20px;
+  /*background-color: rgba(48, 48, 48, 0.788);*/
+  font-weight: bold;
+}
+
+li:hover {
+  background-color: green;
+  box-shadow: 3px 5px 5px;
+}
+
+h3{
+  padding: 1em;
+  color: rgb(0, 189, 0);
+  letter-spacing: 3px;
+}
+
+/* end navbar */
 
 body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  background-image: url("{{ url_for('static', filename='images/homebackground.png') }}");
+  /*background-image: url("{{ url_for('static', filename='images/homebackground.png') }}");*/
   font-family: 'Montserrat';
   font-size: 18px;
   
@@ -142,55 +204,8 @@ body {
   
  }
 
- /* Nav bar */
- ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
 
-.container{
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 7vh;
-  background-color: #24252B;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  box-shadow: 3px 5px 5px rgb(0, 0, 0, 0.4);
-}
-
-ul,li {
-  list-style: none;
-  display: flex;
-  padding: 1em;
-  margin: 0;
-}
-
-li {
-  cursor: pointer;
-  transition: all .5 ease-in-out;
-  margin: 0.5em;
-  padding: 10px 15px;
-  color: whitesmoke;
-  border-radius: 20px;
-  background-color: rgba(48, 48, 48, 0.788);
-  font-weight: bold;
-}
-
-li:hover {
-  background-color: green;
-  box-shadow: 3px 5px 5px;
-}
-
-h3{
-  padding: 1em;
-  color: green;
-  letter-spacing: 3px;
-}
-/*New button code*/
+/*New button code
 
 .cssbuttons-io {
   
@@ -250,8 +265,8 @@ h3{
  .cssbuttons-io:active {
   transform: scale(0.95);
  }
- 
- /* New top 10 */
+ */
+ /* New top 10 
  .cssbuttons-ioTop {
   
   
@@ -310,3 +325,4 @@ h3{
  .cssbuttons-ioTop:active {
   transform: scale(0.95);
  }
+ */
