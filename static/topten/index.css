@@ -2,16 +2,87 @@
 
 
 body {
-    color: green;
-    border-style: solid;
-    width:auto;
-    margin: 1em;
-    padding-left: 2em;
-    padding-right: 2em;
+    
+    
+    
+    font-family: 'Montserrat';
+    font-size: 18px;
     resize: auto;
     background-color: white;
     
 }
+h1{
+  position: absolute;
+  top: 27%;
+  width: 500px;
+}
+h2{
+  position: absolute;
+  top: 35%;
+}
+.label1{
+  position: absolute;
+  top: 18%;
+  
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+.container{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 7vh;
+    background-color: #24252B;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 3px 5px 5px rgb(0, 0, 0, 0.4);
+  }
+
+  ul,li {
+    list-style: none;
+    display: flex;
+    padding: 1em;
+    margin: 0;
+  }
+  
+  li {
+    cursor: pointer;
+    transition: all .5 ease-in-out;
+    margin: 0.5em;
+    padding: 10px 15px;
+    color: whitesmoke;
+    border-radius: 20px;
+    /*background-color: rgba(48, 48, 48, 0.788);*/
+    font-weight: bold;
+  }
+  
+  li:hover {
+    background-color: green;
+    box-shadow: 3px 5px 5px;
+  }
+
+  h3{
+    padding: 1em;
+    color: rgb(0, 189, 0);
+    letter-spacing: 3px;
+  }
+
+  .threelines{
+    position: absolute;
+    z-index: -1;
+    margin: auto;
+    max-width: 300px; 
+    size: 2px;
+    padding: 400px;
+    display: flex;
+    justify-content: center;
+  }
 
 .button {
     background-color: #4CAF50; /* Green */
@@ -22,6 +93,7 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    
   }
 
 h1 {
@@ -30,7 +102,197 @@ h1 {
     border-radius: 0.1ch;
     background-color: green;
     color: aliceblue;
-    width: 5cm;
+    width: 15cm;
+    text-align: center;
     
 }
 
+.search{
+    position: absolute;
+    padding: 1px;
+    width: 150px;
+    top: 21%;
+}
+
+.threelines{
+    position: relative;
+    z-index: -1;
+    margin: auto;
+    max-width: 300px; 
+    size: 2px;
+    padding: 400px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .searchbutton {
+    position: absolute;
+    top: 20%;
+    left: 300px;
+  padding: 10px 20px;
+  border-radius: 7px;
+  border: 1px solid rgb(0, 0, 0);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background-color: #0a0a0a;
+  color: #fff;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  }
+  
+  .searchbutton:hover {
+    background: rgb(0, 0, 0);
+    box-shadow: 0 0 30px 5px rgbargb(0, 189, 0, 0.4);
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+  }
+  
+  .searchbutton:hover::before {
+    -webkit-animation: sh02 0.5s 0s linear;
+    -moz-animation: sh02 0.5s 0s linear;
+    animation: sh02 0.5s 0s linear;
+  }
+  
+  .searchbutton::before {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 86%;
+    position: absolute;
+    top: 7%;
+    left: 0%;
+    opacity: 0;
+    background: #0a0a0a;
+    box-shadow: 0 0 50px 30px #fff;
+    -webkit-transform: skewX(-20deg);
+    -moz-transform: skewX(-20deg);
+    -ms-transform: skewX(-20deg);
+    -o-transform: skewX(-20deg);
+    transform: skewX(-20deg);
+  }
+  
+  @keyframes sh02 {
+    from {
+      opacity: 0;
+      left: 0%;
+    }
+  
+    50% {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0;
+      left: 100%;
+    }
+  }
+  
+  .searchbutton:active {
+    box-shadow: 0 0 0 0 transparent;
+    -webkit-transition: box-shadow 0.2s ease-in;
+    -moz-transition: box-shadow 0.2s ease-in;
+    transition: box-shadow 0.2s ease-in;
+  }
+  
+  .textInput{
+    position: absolute;
+    top: 20.5%;
+  }
+  .textInputWrapper {
+    
+    width: 180px;
+    margin: 12px 5px;
+    --accent-color: #a3e583;
+  }
+  
+  .textInputWrapper:before {
+    transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  }
+  
+  .textInputWrapper:before,
+  .textInputWrapper:after {
+    content: "";
+    left: 0;
+    right: 0;
+    position: absolute;
+    pointer-events: none;
+    bottom: -1px;
+    z-index: 4;
+    width: 100%;
+  }
+  
+  .textInputWrapper:focus-within:before {
+    border-bottom: 1px solid var(--accent-color);
+  }
+  
+  .textInputWrapper:before {
+    transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  }
+  
+  .textInputWrapper:focus-within:before {
+    border-bottom: 1px solid var(--accent-color);
+    transform: scaleX(1);
+  }
+  
+  .textInputWrapper:focus-within:after {
+    border-bottom: 2px solid var(--accent-color);
+    transform: scaleX(1);
+  }
+  
+  .textInputWrapper:after {
+    content: "";
+    transform: scaleX(0);
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    will-change: transform;
+    border-bottom: 2px solid var(--accent-color);
+    border-bottom-color: var(--accent-color);
+  }
+  
+  .textInput::placeholder {
+    transition: opacity 250ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    opacity: 1;
+    user-select: none;
+    color: rgba(255, 255, 255, 0.582);
+  }
+  
+  .textInputWrapper .textInput {
+    border-radius: 5px 5px 0px 0px;
+    box-shadow: 0px 2px 5px rgb(35 35 35 / 30%);
+    max-height: 36px;
+    background-color: #252525;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 200ms;
+    transition-property: background-color;
+    color: #e8e8e8;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px;
+    width: 100%;
+    border-left: none;
+    border-bottom: none;
+    border-right: none;
+  }
+  
+  .textInputWrapper .textInput:focus,
+  .textInputWrapper .textInput:active {
+    outline: none;
+  }
+  
+  .textInputWrapper:focus-within .textInput,
+  .textInputWrapper .textInput:focus,
+  .textInputWrapper .textInput:active {
+    background-color: #353535;
+  }
+  
+  .textInputWrapper:focus-within .textInput::placeholder {
+    opacity: 0;
+  }
+  

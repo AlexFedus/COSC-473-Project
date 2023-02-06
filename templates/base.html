@@ -2,18 +2,36 @@
 <html>
     <head>
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='homepage/login.css')}}">
-        <link rel="icon" type="image/gif" href="{{ url_for('static', filename='images/Spotifyicon.png')}}"">
-        <link rel="icon" type="image/gif" href="{{ url_for('static', filename='images/Spotifyicon.png')}}"">
-    </head>
-    <body>
-        <h1>Spotify Song Recommender</h1>
-        <h3> Spotify Login</h3>
-        {% block content %}
-        
+        {% block link %}
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='topten/login.css')}}">
         {% endblock %}
-        
-        
-    </body>
+        </head>
+        <body>
+            {% block header %}
+            <header>
+                <div class = "container">
+                    <h3> SSR - Spotify Song Recommender </h3>
+                    <ul>
+                        <li><a onclick="window.location.href='/'">Home</a></li>
+                        <li><a onclick="window.location.href='/login'">Login</a></li>
+                        <li><a onclick="window.location.href='/artist'">Top Ten</a></li>
+                        
+                      </ul>
+                </div>
+              </header>
+            {% endblock %}
+            <h1>Spotify Song Recommender</h1>
+            {% block content %}
+            <button onclick="window.location.href='/'">
+                Home
+              </button>
+            
+            <form action="#" method="post">
+                <p Name:></p>
+                <p><input type="text" name="nm"/></p>
+                <p><input type="submit" value="submit"/></p>
+            </form>
+            {% endblock %}
+        </body>
     
 </html>

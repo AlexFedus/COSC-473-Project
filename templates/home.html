@@ -5,168 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='homepage/home.css')}}">
-    <link href='https://fonts.googleapis.com/css?family=Bungee Shade' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>Home - Spotify Song Recommender</title>
-
-
-
     <style>
-       body {
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-        background-image: url("{{ url_for('static', filename='images/homebackground.png') }}");
-        font-family: 'Bungee Shade';
-        font-size: 18px;
-        
-       } 
-       h1{
-        position:fixed;
-       }
-
-       
-       .toptenbutton{
-        
-       
-       
-
-       position:absolute;
-        z-index: 1;
-        top: 80%;
-        left: 60%;
-        display: flex;
-        border-radius: 4px;
-        margin: auto;
-        padding: 32px;
-        width:300px;
-        height:80px;
-
-
-       background-color: green;  
-       border: 0ch;
-       border-radius: 50px;
-       cursor: pointer;
-       text-align: center;
-       font-size: 18px;
-       
-       
-       }
-
-       .toptenbutton span {
-        cursor: pointer;
-        display: inline-block;
-        position: relative;
-        transition: 0.5s;
-       }
-
-       .toptenbutton span:after {
-        content: '\00bb';
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        right: -10px;
-        transition: 0.5s;
-       }
-
-       .toptenbutton:hover span{
-        
-        padding-right: 25px;
-       }
-
-       .toptenbutton:hover span:after{
-        
-        opacity: 1;
-        right: 0;
-       }
-
-       .toptenbutton:hover{
-        background: rgba(47, 255, 75, 0.733);
-       }
-
-       .loginbutton{
-        
-       width:400px;
-       height:80px;
-       
-        position:absolute;
-        z-index: 1;
-        top: 80%;
-        left: 22%;
-        display: flex;
-        border-radius: 4px;
-        margin: auto;
-        padding: 30px;
-        width:300px;
-        height:80px;
-
-       background-color: green;  
-       border: 0ch;
-       border-radius: 50px;
-       cursor: pointer;
-       text-align: center;
-       font-size: 20px;
-       
-       
-       }
-       .loginbutton span{
-        cursor: pointer;
-        display: inline-block;
-        position: relative;
-        transition: 0.5s;
-       }
-       .loginbutton span:after{
-        content: '\00bb';
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        right: -10px;
-        transition: 0.5s;
-       }
-       .loginbutton:hover{
-        background: rgba(47, 255, 75, 0.733);
-        
-       }
-
-       .loginbutton:hover span{
-        padding-right: 25px;
-       }
-       .loginbutton:hover span:after{
-        opacity: 1;
-        right: 0;
-       }
-
-       .homeTitle{
-        position:absolute;
-        z-index: 1;
-        top: 8%;
-        left: 27.5%;
-        display: flex;
-        border-radius: 4px;
-        margin: auto;
-        padding: 0 10px;
-        
-        
-       }
-
-       
-       
+        body{
+            background-color: rgb(255, 255, 255);
+        }
     </style>
+
 </head>
 <body>
     
-
-    
+    <header>
+        <div class = "container">
+            <h3> SSR - Spotify Song Recommender </h3>
+            <ul>
+                <li><a onclick="window.location.href='/'">Home</a></li>
+                <li><a onclick="window.location.href='/login'">Login</a></li>
+                <li><a onclick="window.location.href='/artist'">Top Ten</a></li>
+                
+              </ul>
+        </div>
+    </header>
+    <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class = "threelines" ></image>
+ <!--   
     <h1 class = "homeTitle">Spotify Song Recommender</h1>
-    <button onclick="window.location.href='/artist'" class="toptenbutton"><span>
-        Top Ten Songs for Artists
-    </span></button>
-    <button onclick="window.location.href='/login'" class="loginbutton"><span>
-        Login
-    </span></button>
-
+   
     
+
+    CODE FOR BOTH BUTTONS
+    <button onclick="window.location.href='/login'" class="cssbuttons-io">
+        <span><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z" fill="currentColor"></path>
+        </svg> Login</span>
+      </button>
+      <button onclick="window.location.href='/artist'" class="cssbuttons-ioTop">
+        <span><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z" fill="currentColor"></path>
+        </svg> Top Ten Songs</span>
+      </button>
+
+-->      
+
 </body>
 </html>

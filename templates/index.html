@@ -4,29 +4,43 @@
     
     <title>Top Songs</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='topten/index.css')}}">
-    <link href='https://fonts.googleapis.com/css?family=Arial' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <style>
         body{
-            background-color: black;
-            font-family: 'Arial';
+            background-color: rgb(255, 255, 255);
+            font-family: 'Montserrat';
         }
     </style>
 </head>
 <body>
+
+    <header>
+        <div class = "container">
+            <h3> SSR - Spotify Song Recommender </h3>
+            <ul>
+                <li><a onclick="window.location.href='/'">Home</a></li>
+                <li><a onclick="window.location.href='/login'">Login</a></li>
+                <li><a onclick="window.location.href='/artist'">Top Ten</a></li>
+                
+              </ul>
+        </div>
+    </header>
     <button class= "button" onclick="window.location.href='/'">
         Home
       </button>
     <div>
-        <image src="{{ url_for('static', filename='images/Spotifyicon.png')}}">
+        <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class= "threelines">
         <h1>Top 10 Songs</h1>
         <form action="{{ url_for('views.artist')}}" method="post">
-            <label for="artistname">Artist Name:</label>
-            <input type="text" id="artistname" name="aname" placeholder="artistname">
-            <button type="submit">Search</button>
-        <h1>US top songs</h1>
+            <label for="artistname" class="label1">Enter an Artist:</label>
+            <input type="text" id="artistname" name="aname" placeholder="Enter a artist" class="textInput">
+            <button type="submit" class="searchbutton">Search</button>
+        
+        <h2>
         {% for your_list_element in your_list %}
       <p class= "topsongs">{{ your_list_element }} </p>
-{% endfor %}
+    {% endfor %}
+    </h2>
     </div>
 </body>
 </html>
