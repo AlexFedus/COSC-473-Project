@@ -6,10 +6,11 @@
 
 .threelines{
   position: relative;
+  z-index: -1;
   margin: auto;
-  max-width: 500px; 
-  size: 15px;
-  padding: 300px;
+  max-width: 300px; 
+  size: 2px;
+  padding: 400px;
   display: flex;
   justify-content: center;
 }
