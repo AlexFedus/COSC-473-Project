@@ -3,6 +3,7 @@ import os
 import base64
 from requests import post, get
 import json
+import requests
 
 def getartisttopten(artist):
     load_dotenv()
@@ -85,17 +86,17 @@ def get_login():
     def get_auth_header(token):
         return {"Authorization": "Bearer " + token}
 
-    def search_for_user(token, user):
-        url = "https://api.spotify.com/v1/users/{user_id}"
-        headers = get_auth_header(token)
-        query = f"?q={user}&type=artist&limit=1"
+    def search_for_user(token, user_id):
+        userEndPoint = "https://api.spotify.com/v1/users/{user_id}"
 
-        query_url = url + query
-        result = get(query_url, headers=headers)
-        json_result = json.loads(result.content)["username"]["password"]
-        if len(json_result) == 0:
-            print("Wrong username or password")
-            return None
+        response = requests.get(userEndPoint, headers=get_auth_header)
+        userObject = response.json()
 
-        return json_result[0]
+        return userObject
+
+    token = get_token()
+    
+        
+
+        
 

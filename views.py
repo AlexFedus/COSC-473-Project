@@ -15,8 +15,8 @@ def home():
 @views.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
-        user = request.form.get["em"]
-        password = request.form.get["pw"]
+        user = request.form["em"]
+        password = request.form["pw"]
         #print(user)
         return render_template("login.html")
         #return redirect(url_for("user", usr = user))
