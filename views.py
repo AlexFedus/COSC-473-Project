@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request, url_for, redirect
 from SpotifyAPI import getartisttopten
-
+from dotenv import load_dotenv
+import os
+from spotipy.oauth2 import SpotifyOAuth
 test = []
 
 
@@ -43,3 +45,21 @@ def artist():
        
        
     return render_template("index.html", your_list = test)
+
+@views.route("/spotifyLogin")    
+def spotLogin():
+    sp_oauth = create_spotify_oauth()
+    auth_url = sp_oauth.get_authorize_url()
+    return redirect(auth_url)
+
+@views.route("/redirect")     
+def redirectPage():
+    return 'redirect'
+
+def create_spotify_oauth():
+    return SpotifyOAuth(
+        client_id = os.getenv("CLIENT_ID"),
+        client_secret = os.getenv("CLIENT_SECRET"),
+        redirect_uri = url_for('views.redirectPage', _external=True),
+        scope = "user-library-read"
+    ) 
