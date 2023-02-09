@@ -1,9 +1,18 @@
 from dotenv import load_dotenv
-from flask import url_for
+from flask import url_for, redirect, session ,request
 import os
 import base64
 from requests import post, get
 import json
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
+import time
+
+test = []
+userSavedTracks = []
+json_results = []
+
+TOKEN_INFO = "token_info"
 
 def getartisttopten(artist):
     load_dotenv()
@@ -60,3 +69,49 @@ def getartisttopten(artist):
     return songs
 
 
+
+def getUserSavedTracks():
+    trackURIs = []
+    try:
+        token_info = get_token()
+    except:
+        print("user not logged in")
+        return redirect(url_for("views.home", _external = True))
+    sp = spotipy.Spotify(auth = token_info['access_token'])    
+    #prints to consol users 50 saved tracks
+    all_songs = []
+    iteration = 0
+
+    while True:
+            items = sp.current_user_saved_tracks(limit=50, offset=iteration * 50)['items']
+            iteration += 1
+            all_songs += items
+            if (len(items) < 50):
+                break
+            
+    #json_result = items[0]
+    #for item in items:
+        #tracks = json_result['track']['name']
+    return all_songs
+
+
+def get_token():
+    token_info = session.get(TOKEN_INFO, None)  
+    if not token_info:
+        raise "exception" 
+
+    now = int(time.time()) 
+
+    is_expired = token_info['expires_at'] - now < 60
+    if (is_expired) :
+        sp_oauth = create_spotify_oauth()
+        token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
+    return token_info   
+
+def create_spotify_oauth():
+    return SpotifyOAuth(
+        client_id = os.getenv("CLIENT_ID"),
+        client_secret = os.getenv("CLIENT_SECRET"),
+        redirect_uri = url_for('views.redirectPage', _external=True),
+        scope = "user-library-read"
+    ) 

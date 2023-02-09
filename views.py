@@ -1,12 +1,12 @@
 from flask import Blueprint, render_template, request, url_for, redirect, session
-from SpotifyAPI import getartisttopten
+from SpotifyAPI import getartisttopten, getUserSavedTracks
 from dotenv import load_dotenv
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
 import time
 test = []
-
+finalTrackList = []
 
 TOKEN_INFO = "token_info"
 
@@ -34,16 +34,7 @@ def login():
 @views.route("/artist", methods =["GET", "POST"])
 def artist():
 
-        trackURIs = []
-        try:
-            token_info = get_token()
-        except:
-            print("user not logged in")
-            return redirect(url_for("views.home", _external = True))
-        sp = spotipy.Spotify(auth = token_info['access_token'])    
-        #prints to consol users 50 saved tracks
-        all_songs = []
-        iteration = 0
+        
      
         if request.method == "POST":
         #checks if access token is expired and gets a refreshed token and check if it has token data
@@ -59,18 +50,31 @@ def artist():
             for idx, song in enumerate(songs):
                 test.append(f"{idx + 1}. {song['name']}")
         
-        while True:
-            items = sp.current_user_saved_tracks(limit=50, offset=iteration * 50)['items']
-            #track_name = sp.current_user_saved_tracks(limit=50, offset=iteration * 50)['items']
-            iteration += 1
-            all_songs += items
-            if (len(items) < 50):
-                break
-        print(str(items[0]))
+       
             
-
+        tracks = getUserSavedTracks()
+        #inc = 0
+        for idx, track in enumerate(tracks):
+            if idx == 50:
+                break
+            finalTrackList.append(f"{idx + 1}. {track['track']['name']}")
+            
+            
            
-        return render_template("index.html", your_list = test)
+        return render_template("index.html", your_list = test, track_list = finalTrackList)
+#@views.route("/artist", methods =["GET", "POST"])
+#def userTracks():
+        #tracks = getUserSavedTracks()
+        #inc = 0
+        #for idx, track in enumerate(tracks):
+            #if idx == 50:
+                #break
+            #finalTrackList.append(f"{idx + 1}. {track['track']['name']}")
+            #print(track['track']['name'])
+            
+            
+           
+        #return render_template("index.html", track_list = finalTrackList)
 
 @views.route("/spotifyLogin")    
 def spotLogin():
@@ -95,15 +99,4 @@ def create_spotify_oauth():
         scope = "user-library-read"
     ) 
 
-def get_token():
-    token_info = session.get(TOKEN_INFO, None)  
-    if not token_info:
-        raise "exception" 
-
-    now = int(time.time()) 
-
-    is_expired = token_info['expires_at'] - now < 60
-    if (is_expired) :
-        sp_oauth = create_spotify_oauth()
-        token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
-    return token_info    
+ 
