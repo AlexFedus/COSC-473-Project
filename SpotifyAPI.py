@@ -87,7 +87,9 @@ def getUserSavedTracks():
             iteration += 1
             all_songs += items
             if (len(items) < 50):
+                print(sp.current_user())
                 break
+            
             
     #json_result = items[0]
     #for item in items:
