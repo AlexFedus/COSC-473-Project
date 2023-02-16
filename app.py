@@ -4,6 +4,7 @@ from spotipy import SpotifyOAuth
 from dotenv import load_dotenv
 import os
 import spotipy
+from flask_session import Session
 
 
 #from SpotifyAPI import songs
@@ -12,7 +13,7 @@ import spotipy
 app = Flask(__name__)
 
 app.secret_key = "0afafa34v"
-app.config['SESSION_COOKIE_NAME'] = 'COSC Cookie'
+
 
 
 
