@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from views import views
 from spotipy import SpotifyOAuth
 from dotenv import load_dotenv
@@ -22,3 +23,8 @@ app.register_blueprint(views, url_prefix="/")
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
+
+
+#Database
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI']
