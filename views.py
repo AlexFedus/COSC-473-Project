@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, request, url_for, redirect
-from SpotifyAPI import getartisttopten, get_login
+from SpotifyAPI import getartisttopten
 
 test = []
+finalTrackList = []
 
-
-
+TOKEN_INFO = "token_info"
 
 views = Blueprint(__name__,"views")
 
@@ -33,17 +33,70 @@ def login():
 
 @views.route("/artist", methods =["GET", "POST"])
 def artist():
-    if request.method == "POST":
+
+        
+     
+        if request.method == "POST":
+        #checks if access token is expired and gets a refreshed token and check if it has token data
+        
        # getting input with name = fname in HTML form
-       artist_name = request.form.get("aname")
+            artist_name = request.form.get("aname")
        # getting input with name = lname in HTML form
-       songs = getartisttopten(artist_name)
+            songs = getartisttopten(artist_name)
         
        
-       test.clear()
+            test.clear()
        
-       for idx, song in enumerate(songs):
-            test.append(f"{idx + 1}. {song['name']}")
+            for idx, song in enumerate(songs):
+                test.append(f"{idx + 1}. {song['name']}")
+        
        
-       
-    return render_template("index.html", your_list = test)
+            
+        tracks = getUserSavedTracks()
+        #inc = 0
+        for idx, track in enumerate(tracks):
+            if idx == 50:
+                break
+            finalTrackList.append(f"{idx + 1}. {track['track']['name']}")
+            
+            
+           
+        return render_template("index.html", your_list = test, track_list = finalTrackList)
+#@views.route("/artist", methods =["GET", "POST"])
+#def userTracks():
+        #tracks = getUserSavedTracks()
+        #inc = 0
+        #for idx, track in enumerate(tracks):
+            #if idx == 50:
+                #break
+            #finalTrackList.append(f"{idx + 1}. {track['track']['name']}")
+            #print(track['track']['name'])
+            
+            
+           
+        #return render_template("index.html", track_list = finalTrackList)
+
+@views.route("/spotifyLogin")    
+def spotLogin():
+    sp_oauth = create_spotify_oauth()
+    auth_url = sp_oauth.get_authorize_url()
+    return redirect(auth_url)
+
+@views.route("/redirect")     
+def redirectPage():
+    sp_oauth = create_spotify_oauth()
+    session.clear()
+    code = request.args.get('code')
+    token_info = sp_oauth.get_access_token(code)
+    session[TOKEN_INFO] = token_info
+    return redirect(url_for('views.home', _external=True))
+
+def create_spotify_oauth():
+    return SpotifyOAuth(
+        client_id = os.getenv("CLIENT_ID"),
+        client_secret = os.getenv("CLIENT_SECRET"),
+        redirect_uri = url_for('views.redirectPage', _external=True),
+        scope = "user-library-read"
+    ) 
+
+ 

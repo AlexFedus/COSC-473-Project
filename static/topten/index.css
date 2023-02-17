@@ -15,10 +15,36 @@ h1{
   position: absolute;
   top: 27%;
   width: 500px;
+  border-style: solid;
+    border-width: 0.2ch;
+    border-radius: 0.1ch;
+    background-color: green;
+    color: aliceblue;
+    width: 15cm;
+    text-align: center;
 }
 h2{
   position: absolute;
   top: 35%;
+}
+
+h4{
+  position: absolute;
+  top: 27%;
+  left: 70%;
+  
+  
+}
+.savedLabel{
+  background-color: green;
+  border: aliceblue;;
+  border-style: solid;
+    border-width: 0.2ch;
+    border-radius: 0.1ch;
+    
+    color: aliceblue;
+    width: 500px;
+    text-align: center;
 }
 .label1{
   position: absolute;
@@ -96,16 +122,7 @@ ul {
     
   }
 
-h1 {
-    border-style: solid;
-    border-width: 0.2ch;
-    border-radius: 0.1ch;
-    background-color: green;
-    color: aliceblue;
-    width: 15cm;
-    text-align: center;
-    
-}
+
 
 .search{
     position: absolute;
@@ -129,6 +146,26 @@ h1 {
     position: absolute;
     top: 20%;
     left: 300px;
+  padding: 10px 20px;
+  border-radius: 7px;
+  border: 1px solid rgb(0, 0, 0);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background-color: #0a0a0a;
+  color: #fff;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  }
+
+  .searchbutton2 {
+    position: absolute;
+    top: 20%;
+    left: 600px;
   padding: 10px 20px;
   border-radius: 7px;
   border: 1px solid rgb(0, 0, 0);
