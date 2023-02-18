@@ -4,8 +4,12 @@ from dotenv import load_dotenv
 import os
 import spotipy
 
-from spotipy.oauth2 import SpotifyOAuth
+from spotipy import Spotify, util
 import time
+from flask_sqlalchemy import SQLAlchemy
+from spotipy.oauth2 import SpotifyOAuth
+from datetime import datetime
+from datetime import timedelta
 
 
 
@@ -20,6 +24,22 @@ SCOPE = 'user-library-read,user-read-email'
 
 
 views = Blueprint(__name__,"views")
+
+db = SQLAlchemy()
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    access_token = db.Column(db.String(200))
+    refresh_token = db.Column(db.String(200))
+    token_expiration = db.Column(db.DateTime)
+
+    def __repr__(self):
+        return f'<User {self.spotify_id}>'
+
+# Helper function to get the user's Spotify object
+def get_spotify_object(token):
+    return Spotify(auth=token)
 
 @views.route("/")
 def home():
@@ -86,45 +106,80 @@ def artist():
         #return render_template("index.html", track_list = finalTrackList)
 
 
-@views.route("spotifyLogin")
-def login():
-    sp_oauth = create_spotify_oauth()
+@views.route('/spotifyLogin')
+def loginsp():
+    sp_oauth = SpotifyOAuth(
+        client_id=SPOTIPY_CLIENT_ID,
+        client_secret=SPOTIPY_CLIENT_SECRET,
+        redirect_uri=SPOTIPY_REDIRECT_URI,
+        scope=SCOPE
+    )
+
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
 
-
-@views.route("/callback")     
+# Callback route
+@views.route('/callback')
 def callback():
-    sp_oauth = create_spotify_oauth()
-    session.clear()
+    
+    
+    sp_oauth = SpotifyOAuth(
+        client_id=SPOTIPY_CLIENT_ID,
+        client_secret=SPOTIPY_CLIENT_SECRET,
+        redirect_uri=SPOTIPY_REDIRECT_URI,
+        scope='user-library-read'
+    )
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
-    session_id = session.sid
-    session_data = session.get('spotify_tokens', {})
-    session_data[session_id] = token_info['access_token']
-    session['spotify_tokens'] = session_data
-    return redirect('/currentuser')
-
-
-def create_spotify_oauth():
-    return SpotifyOAuth(
-        client_id="83c609c1ed86447ebc5d4ffd526f9730",
-        client_secret="ae50126def9a4e96a344385597ab9443",
-        redirect_uri=url_for('views.callback', _external=True),
-        scope="user-library-read"
-    )
+    access_token = token_info['access_token']
+    refresh_token = token_info['refresh_token']
+    expires_in = token_info['expires_in']
     
-    
-@views.route("/logout")
-def logout():
-    session.clear()
-    return redirect('/') 
-
-@views.route("/currentuser")
-def cuser():
-    if 'access_token' not in session:
-        return redirect('/login')
-    access_token = session['access_token']
     sp = spotipy.Spotify(auth=access_token)
-    user = sp.current_user()
-    return f'Logged in as {user["display_name"]}'
+    user_info = sp.current_user()
+    user_id = user_info['id']
+    email = user_info['email']
+
+    # Check if user already exists
+    user = User.query.filter_by(email=email).first()
+    if user:
+        user.access_token = access_token
+        user.refresh_token = refresh_token
+        user.token_expiration = datetime.now() + timedelta(seconds=expires_in)
+    else:
+        # Create a new user
+        user = User(
+            id=user_id,
+            email=email,
+            access_token=access_token,
+            refresh_token=refresh_token,
+            token_expiration=datetime.now() + timedelta(seconds=expires_in)
+        )
+        db.session.add(user)
+    db.session.commit()
+    
+    """
+    user = User(
+        access_token=access_token,
+        refresh_token=refresh_token,
+        token_expiration=datetime.now() + timedelta(seconds=expires_in)
+    )
+    db.session.add(user)
+    db.session.commit()
+
+    """
+    return email
+    
+# Top songs route
+@views.route('/top_songs')
+def top_songs():
+    # Get the user's access token from the database
+    user = User.query.filter_by(id=session['user_id']).first()
+    token = user.access_token
+
+    # Get the user's top tracks from Spotify
+    spotify = get_spotify_object(token)
+    top_tracks = spotify.current_user_top_tracks(limit=10, time_range='short_term')['items']
+
+    # Render the top songs template with the user's top tracks
+    return render_template('top_songs.html', top_tracks=top_tracks)
