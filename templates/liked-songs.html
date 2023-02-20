@@ -10,11 +10,17 @@
         <div class = "container">
             <h3> SSR - Spotify Song Recommender </h3>
             <ul class = "navbar">
+                
+                
                 <li class = "navbarli"><a onclick="window.location.href='/'">Home</a></li>
                 <li class = "navbarli"><a onclick="window.location.href='/login'">Login</a></li>
                 <li class = "navbarli"><a onclick="window.location.href='/artist'">Top Ten</a></li>
-                <li class = "navbarli"><a onclick="window.location.href='/spotifyLogin'">Login to Spotify</a></li>
-                <li class = "navbarli"><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>
+                {% if request.cookies.get('session') %}
+                    <li class = "navbarli"><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>
+                    <li class = "navbarli"><a onclick="window.location.href='/logout'">Logout</a></li>
+                {% else %}
+                    <li class = "navbarli"><a onclick="window.location.href='/spotifyLogin'">Login to Spotify</a></li>
+                {% endif %}
                 
               </ul>
         </div>
