@@ -117,3 +117,18 @@ def create_spotify_oauth():
         redirect_uri = url_for('views.redirectPage', _external=True),
         scope = "user-library-read"
     ) 
+
+
+
+def logout_spotify():
+    # Remove the token info from the session
+    session.pop(TOKEN_INFO, None)
+
+    # Create a SpotifyOAuth instance
+    sp_oauth = create_spotify_oauth()
+
+    # Get the logout URL with show_dialog=True
+    logout_url = sp_oauth.get_authorize_url(show_dialog=True)
+
+    # Redirect the user to the Spotify logout page
+    return redirect(logout_url)

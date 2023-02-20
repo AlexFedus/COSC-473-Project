@@ -1,16 +1,20 @@
 from flask import Blueprint, render_template, request, url_for, redirect, session
-from SpotifyAPI import getartisttopten, getUserSavedTracks
+from SpotifyAPI import getartisttopten, getUserSavedTracks, logout_spotify
 from dotenv import load_dotenv
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
 import time
+import requests
+import base64
 test = []
 finalTrackList = []
 
 TOKEN_INFO = "token_info"
 
 views = Blueprint(__name__,"views")
+
+
 
 @views.route("/")
 def home():
@@ -27,9 +31,7 @@ def login():
         return render_template("login.html")
     
 
-#@views.route("/<usr>")
-#def user(usr):
-    #return f"<h1>{views.usr}</h1>"
+
 
 @views.route("/artist", methods =["GET", "POST"])
 def artist():
@@ -62,25 +64,19 @@ def artist():
             
            
         return render_template("index.html", your_list = test, track_list = finalTrackList)
-#@views.route("/artist", methods =["GET", "POST"])
-#def userTracks():
-        #tracks = getUserSavedTracks()
-        #inc = 0
-        #for idx, track in enumerate(tracks):
-            #if idx == 50:
-                #break
-            #finalTrackList.append(f"{idx + 1}. {track['track']['name']}")
-            #print(track['track']['name'])
-            
-            
-           
-        #return render_template("index.html", track_list = finalTrackList)
+
 
 @views.route("/spotifyLogin")    
 def spotLogin():
     sp_oauth = create_spotify_oauth()
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
+
+
+@views.route("/logout")
+def logout():
+    
+    return logout_spotify()
 
 @views.route("/redirect")     
 def redirectPage():
@@ -99,4 +95,33 @@ def create_spotify_oauth():
         scope = "user-library-read"
     ) 
 
- 
+@views.route("/deauth")    
+def deauth():
+    # Get the user's access token from your Flask session
+    access_token = session[TOKEN_INFO]
+    
+    # Send a request to revoke the access token
+    headers = {
+        'Authorization': f'Bearer {access_token}' 
+    }
+    response = requests.post('https://accounts.spotify.com/api/token/revoke', headers=headers)
+    
+    if response.status_code == 200:
+        # Access token revoked successfully, remove it from the session
+        session.pop('access_token', None)
+        print('Access token revoked successfully.')
+    else:
+        # Access token revocation failed
+        print('Access token revocation failed.')
+    return render_template('home.html')
+
+def revoketoken():
+    headers = {'Authorization': 'Basic ' + base64.b64encode(f'{os.getenv("CLIENT_ID")}:{os.getenv("CLIENT_SECRET")}'.encode()).decode()}
+    data = {'token': TOKEN_INFO}
+    response = requests.post('https://accounts.spotify.com/api/token/revoke', headers=headers, data=data)
+
+    if response.status_code == 200:
+         print('Access token revoked successfully')
+    else:
+        print('Failed to revoke access token')
+        print(response.content)
