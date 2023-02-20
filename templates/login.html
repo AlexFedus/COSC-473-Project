@@ -29,13 +29,13 @@
 
             <div class="login-box">
               <p>Login</p>
-              <form>
+              <form action="login.php" method="POST">
                 <div class="user-box">
-                  <input required="" name="nm" type="text">
+                  <input required="" name="email" type="text">
                   <label>Email</label>
                 </div>
                 <div class="user-box">
-                  <input required="" name="pw" type="password">
+                  <input required="" name="password" type="password">
                   <label>Password</label>
                 </div>
                 <a href="#">
@@ -43,6 +43,7 @@
                   <span></span>
                   <span></span>
                   <span></span>
+                  <button type="submit" class="searchbutton"></button>
                   Submit
                 </a>
               </form>

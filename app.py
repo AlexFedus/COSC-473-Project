@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import pymysql
 from views import views
 from spotipy import SpotifyOAuth
 from dotenv import load_dotenv
@@ -27,4 +28,12 @@ if __name__ == "__main__":
 
 #Database
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI']
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sql9598812:uJVAVztfRj@sql9.freesqldatabase.com/sql9598812'
+db = SQLAlchemy(app)
+
+class test(db.Model):
+    username = db.Column(db.varchar(50))
+    password = db.Column(db.varchar(50))
+
+
+
