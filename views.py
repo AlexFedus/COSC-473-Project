@@ -36,6 +36,7 @@ class User(db.Model):
     access_token = db.Column(db.String(200))
     refresh_token = db.Column(db.String(200))
     token_expiration = db.Column(db.DateTime)
+    display_name = db.Column(db.String(100))
 
     def __repr__(self):
         return f'<User {self.spotify_id}>'
@@ -134,7 +135,8 @@ def loginsp():
                 email=user_info.get('email'),
                 access_token=access_token,
                 refresh_token=token_info['refresh_token'],
-                token_expiration=datetime.fromtimestamp(token_info['expires_at'])
+                token_expiration=datetime.fromtimestamp(token_info['expires_at']),
+                display_name = user_info['display_name']
             )
             db.session.add(user)
         else:
@@ -142,7 +144,7 @@ def loginsp():
             user.refresh_token = token_info['refresh_token']
             user.token_expiration = datetime.fromtimestamp(token_info['expires_at'])
         db.session.commit()
-        session['user'] = {'id': user.id, 'email': user.email}
+        session['user'] = {'id': user.id, 'email': user.email, 'display_name' : user.display_name}
         print(access_token)
         return redirect('/')
     else:
@@ -186,6 +188,7 @@ def callback():
             response_data = response.json()
             email = response_data['email']
             spotify_id = response_data['id']
+            display_name = response_data['display_name']
             
             print(email)
 
@@ -216,13 +219,14 @@ def callback():
                 db.session.commit()
             else:
                 # Create a new user record in the database
-                user = User(email=email, access_token=access_token, refresh_token=refresh_token, token_expiration=token_expiration, spotify_id = spotify_id)
+                user = User(email=email, access_token=access_token, refresh_token=refresh_token, token_expiration=token_expiration, spotify_id = spotify_id, display_name = display_name)
                 db.session.add(user)
                 db.session.commit()
 
             # Set the user ID in the session
             session['user_id'] = user.id
             session['email'] = email
+            session['display_name'] = display_name
 
             # Redirect the user to the home page
             #return redirect(url_for('index'))
