@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+header {
+    background-color: #1db954;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-top: 50px;
+}
+
+ol {
+    list-style: decimal;
+    margin-left: 20px;
+}
+
+li {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Media queries */
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    li {
+        font-size: 16px;
+    }
+}

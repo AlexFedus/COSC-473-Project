@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, url_for, redirect , session
+from flask import Blueprint, make_response, render_template, request, url_for, redirect , session
 import requests
 from SpotifyAPI import getartisttopten, getUserSavedTracks
 from dotenv import load_dotenv
@@ -11,6 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 from spotipy.oauth2 import SpotifyOAuth
 import datetime
 from datetime import timedelta
+
 
 
 
@@ -299,6 +300,13 @@ def callback():
 # Top songs route
 @views.route('/liked-songs')
 def liked_songs():
+    
+    
+    user_id = session.get('user_id')
+    if not user_id:
+        # If the user is not logged in, redirect them to the login page
+        return redirect('/spotifyLogin')
+    
     # Retrieve the user's access token from the database
     user = User.query.filter_by(email=session['email']).first()
     access_token = user.access_token
@@ -323,5 +331,15 @@ def liked_songs():
     else:
         liked_songs = None
        
-        return render_template('liked-songs.html', liked_songs=liked_songs)
+    return render_template('liked-songs.html', liked_songs=liked_songs)
             
+@views.route('/logout')
+def logout():
+    resp = make_response(redirect('/'))
+    resp.set_cookie('session', '', expires=0)
+    return resp
+
+
+
+    
+    

@@ -15,16 +15,22 @@
 <body>
 
     <header>
-        <div class = "container">
-            <h3> SSR - Spotify Song Recommender </h3>
-            <ul>
-                <li><a onclick="window.location.href='/'">Home</a></li>
-                <li><a onclick="window.location.href='/login'">Login</a></li>
-                <li><a onclick="window.location.href='/artist'">Top Ten</a></li>
-                
-              </ul>
-        </div>
-    </header>
+        <header>
+            <div class="container">
+                <h3>SSR - Spotify Song Recommender</h3>
+                <ul>
+                    <li><a onclick="window.location.href='/'">Home</a></li>
+                    <li><a onclick="window.location.href='/login'">Login</a></li>
+                    <li><a onclick="window.location.href='/artist'">Top Ten</a></li>
+                    {% if request.cookies.get('session') %}
+                        <li><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>
+                        <li><a onclick="window.location.href='/logout'">Logout</a></li>
+                    {% else %}
+                        <li><a onclick="window.location.href='/spotifyLogin'">Login to Spotify</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </header>
     <button class= "button" onclick="window.location.href='/'">
         Home
       </button>
@@ -42,12 +48,7 @@
       
         {% endfor %}
         </h2>
-        <h4>
-        <label class="savedLabel"> Your Saved Tracks </label>
-        {% for track_list_element in track_list %}
-        <p class="savedsongs">{{ track_list_element }} </p>
-        {% endfor %}
-        </h4>
+        
         
     
         

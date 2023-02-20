@@ -19,39 +19,24 @@
 <body>
     
     <header>
-        <div class = "container">
-            <h3> SSR - Spotify Song Recommender </h3>
+        <div class="container">
+            <h3>SSR - Spotify Song Recommender</h3>
             <ul>
                 <li><a onclick="window.location.href='/'">Home</a></li>
                 <li><a onclick="window.location.href='/login'">Login</a></li>
                 <li><a onclick="window.location.href='/artist'">Top Ten</a></li>
-                <li><a onclick="window.location.href='/spotifyLogin'">Login to Spotify</a></li>
-                <li><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>
-                
-              </ul>
+                {% if request.cookies.get('session') %}
+                    <li><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>
+                    <li><a onclick="window.location.href='/logout'">Logout</a></li>
+                {% else %}
+                    <li><a onclick="window.location.href='/spotifyLogin'">Login to Spotify</a></li>
+                {% endif %}
+            </ul>
         </div>
     </header>
-    <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class = "threelines" ></image>
- <!--   
-    <h1 class = "homeTitle">Spotify Song Recommender</h1>
-   
     
-
-    CODE FOR BOTH BUTTONS
-    <button onclick="window.location.href='/login'" class="cssbuttons-io">
-        <span><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z" fill="currentColor"></path>
-        </svg> Login</span>
-      </button>
-      <button onclick="window.location.href='/artist'" class="cssbuttons-ioTop">
-        <span><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z" fill="currentColor"></path>
-        </svg> Top Ten Songs</span>
-      </button>
-
--->      
+    <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class = "threelines" ></image>
+ 
 
 </body>
 </html>

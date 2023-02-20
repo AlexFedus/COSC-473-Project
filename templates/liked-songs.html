@@ -4,6 +4,20 @@
     <title>Liked Songs</title>
 </head>
 <body>
+    <header>
+        <div class = "container">
+            <h3> SSR - Spotify Song Recommender </h3>
+            <ul>
+                <li><a onclick="window.location.href='/'">Home</a></li>
+                <li><a onclick="window.location.href='/login'">Login</a></li>
+                <li><a onclick="window.location.href='/artist'">Top Ten</a></li>
+                <li><a onclick="window.location.href='/spotifyLogin'">Login to Spotify</a></li>
+                <li><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>
+                
+              </ul>
+        </div>
+    </header>
+
     <h1>Liked Songs</h1>
     {% if liked_songs %}
         <ul>
