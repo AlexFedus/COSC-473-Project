@@ -16,7 +16,7 @@ from spotipy.oauth2 import SpotifyOAuth
 app = Flask(__name__)
 
 app.secret_key = "0afafa34v"
-app.config['SESSION_TYPE'] = 'filesystem'
+#app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sql9598812:uJVAVztfRj@sql9.freesqldatabase.com:3306/sql9598812'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

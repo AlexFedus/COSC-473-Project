@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liked Songs</title>
+</head>
+<body>
+    <h1>Liked Songs</h1>
+    {% if liked_songs %}
+        <ul>
+            {% for song in liked_songs %}
+                <li>
+                    <img src="{{ song.image }}" width="100" height="100">
+                    <h2>{{ song.name }}</h2>
+                    <p>{{ song.artist }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No liked songs found.</p>
+    {% endif %}
+</body>
+</html>
