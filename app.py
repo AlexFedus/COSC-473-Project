@@ -1,16 +1,16 @@
-from flask import Flask, request, url_for, session, redirect
+from flask import Flask
 from views import views
 from views import db
-from spotipy import SpotifyOAuth
-from dotenv import load_dotenv
-import os
-import spotipy
-from flask_session import Session
-from flask_sqlalchemy import SQLAlchemy
-from spotipy.oauth2 import SpotifyOAuth
 
 
-#from SpotifyAPI import songs
+"""
+This File is the file that is ran when you want to start the development server.
+
+In this file, our database is connected and our blueprint file is linked. 
+
+"""
+
+
 
 
 app = Flask(__name__)
@@ -22,7 +22,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 
-
+# All of our routes are kept in a "views.py" for organization
 app.register_blueprint(views, url_prefix="/")
 
 

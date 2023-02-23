@@ -1,18 +1,18 @@
-from flask import Blueprint, make_response, render_template, request, url_for, redirect , session
+from flask import Blueprint, make_response, render_template, request,  redirect , session
 import requests
-from SpotifyAPI import getartisttopten, getUserSavedTracks
-from dotenv import load_dotenv
-import os
+from SpotifyAPI import getartisttopten
 import spotipy
-
-from spotipy import Spotify, util
-import time
+from spotipy import Spotify
 from flask_sqlalchemy import SQLAlchemy
 from spotipy.oauth2 import SpotifyOAuth
 import datetime
 from datetime import timedelta
 
+"""
+This file contains all the code for each of the different routes on 
+our site.
 
+"""
 
 
 test = []
@@ -29,6 +29,11 @@ views = Blueprint(__name__,"views")
 
 db = SQLAlchemy()
 
+
+"""
+This class defines what information is saved in our
+database.
+"""
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     spotify_id = db.Column(db.String(100), nullable=False)
@@ -45,6 +50,7 @@ class User(db.Model):
 def get_spotify_object(token):
     return Spotify(auth=token)
 
+#The route that displays our homepage
 @views.route("/")
 def home():
     return render_template("home.html")
@@ -59,16 +65,14 @@ def loginapp():
     else:
         return render_template("login.html")
     
+    
 
-#@views.route("/<usr>")
-#def user(usr):
-    #return f"<h1>{views.usr}</h1>"
+#This route displays an artists top ten songs on spotify
+# It does this by calling a function from "SpotifyAPI.py"
 
 @views.route("/artist", methods =["GET", "POST"])
 def artist():
 
-        
-     
         if request.method == "POST":
         #checks if access token is expired and gets a refreshed token and check if it has token data
         
@@ -83,33 +87,16 @@ def artist():
             for idx, song in enumerate(songs):
                 test.append(f"{idx + 1}. {song['name']}")
         
-       
-        """    
-        tracks = getUserSavedTracks()
-        #inc = 0
-        for idx, track in enumerate(tracks):
-            if idx == 50:
-                break
-            finalTrackList.append(f"{idx + 1}. {track['track']['name']}")
-        """
-            
            
         return render_template("index.html", your_list = test, track_list = finalTrackList)
-#@views.route("/artist", methods =["GET", "POST"])
-#def userTracks():
-        #tracks = getUserSavedTracks()
-        #inc = 0
-        #for idx, track in enumerate(tracks):
-            #if idx == 50:
-                #break
-            #finalTrackList.append(f"{idx + 1}. {track['track']['name']}")
-            #print(track['track']['name'])
-            
-            
-           
-        #return render_template("index.html", track_list = finalTrackList)
 
 
+
+"""
+This route is triggered when a user clicks to log in to spotify
+It utilizes our client id and secret to gain an access token
+
+"""
 @views.route('/spotifyLogin')
 def loginsp():
     sp_oauth = SpotifyOAuth(
@@ -119,13 +106,16 @@ def loginsp():
         scope='user-library-read user-read-email user-read-private'
     )
 
+    #Requesting a code and turning it into a token
     code = request.args.get('code')
     if code:
         token_info = sp_oauth.get_access_token(code)
         access_token = token_info['access_token']
        
         
-        
+        #Gets the id of who is logging in, if they are not in the database
+        #They are added, if they are, their tokens are updated
+        #The user is then redirected to the homepage after logging in.
         sp = spotipy.Spotify(auth=access_token)
         user_info = sp.current_user()
         user = User.query.filter_by(spotify_id=user_info['id']).first()
@@ -145,7 +135,6 @@ def loginsp():
             user.token_expiration = datetime.fromtimestamp(token_info['expires_at'])
         db.session.commit()
         session['user'] = {'id': user.id, 'email': user.email, 'display_name' : user.display_name}
-        print(access_token)
         return redirect('/')
     else:
         auth_url = sp_oauth.get_authorize_url()
@@ -159,7 +148,7 @@ def callback():
     
     auth_code = request.args.get('code')
 
-    # Use the authorization code to request an access token
+    # Use the auth code to request an access token
     response = requests.post('https://accounts.spotify.com/api/token', data={
         'grant_type': 'authorization_code',
         'code': auth_code,
@@ -233,71 +222,7 @@ def callback():
 
             return redirect('/')
         return 'error'
-"""
-def callback():
-    
-    
-    auth_code = request.args.get('code')
 
-    # Use the authorization code to request an access token
-    response = requests.post('https://accounts.spotify.com/api/token', data={
-        'grant_type': 'authorization_code',
-        'code': auth_code,
-        'redirect_uri': SPOTIPY_REDIRECT_URI,
-        'client_id': SPOTIPY_CLIENT_ID,
-        'client_secret': SPOTIPY_CLIENT_SECRET
-    })
-
-    # Parse the response and extract the access token
-    if response.status_code == 200:
-        response_data = response.json()
-        access_token = response_data['access_token']
-        
-        print("callback function:" + access_token)
-        
-        refresh_token = response_data['refresh_token']
-        token_expiration = datetime.datetime.now() + datetime.timedelta(seconds=response_data['expires_in'])
-
-        # Use the access token to get the user's Spotify profile information
-        headers = {'Authorization': 'Bearer ' + access_token}
-        response = requests.get('https://api.spotify.com/v1/me', headers=headers)
-
-        # Parse the response and extract the user's email address
-        if response.status_code == 200:
-            response_data = response.json()
-            email = response_data['email']
-            spotify_id = response_data['id']
-            
-            print(email)
-
-            # Check if the user already exists in the database
-            user = User.query.filter_by(email=email).first()
-
-            if user:
-                # Update the user's access token, refresh token, and token expiry
-                user.access_token = access_token
-                user.refresh_token = refresh_token
-                user.token_expiration = token_expiration
-                user.spotify_id = spotify_id
-                db.session.commit()
-            else:
-                # Create a new user record in the database
-                user = User(email=email, access_token=access_token, refresh_token=refresh_token, token_expiration=token_expiration, spotify_id = spotify_id)
-                db.session.add(user)
-                db.session.commit()
-
-            # Set the user ID in the session
-            session['user_id'] = user.id
-            session['email'] = email
-
-            # Redirect the user to the home page
-            #return redirect(url_for('index'))
-
-            return redirect('/')
-        return 'error'
-    # If there was an error, redirect the user to an error page
-    
-"""
   
   
     
@@ -336,7 +261,8 @@ def liked_songs():
         liked_songs = None
        
     return render_template('liked-songs.html', liked_songs=liked_songs)
-            
+
+# Clears the cookie to logout            
 @views.route('/logout')
 def logout():
     resp = make_response(redirect('/'))
