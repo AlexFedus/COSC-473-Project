@@ -1,4 +1,4 @@
-from flask import Blueprint, make_response, render_template, request,  redirect , session
+from flask import Blueprint, make_response, render_template, request,  redirect , session, url_for
 import requests
 from SpotifyAPI import getartisttopten
 import spotipy
@@ -59,7 +59,12 @@ def home():
     
     spotify = spotipy.Spotify(auth=request.cookies.get("user"))
     user = spotify.current_user()
-    profile_picture_url = user["images"][0]["url"]
+    
+    try:
+        profile_picture_url = user["images"][0]["url"]
+    except:
+        profile_picture_url = url_for('static', filename='images/profilepicimages.png')
+        
     return render_template("home.html", profile_picture_url=profile_picture_url)
     
     
@@ -92,7 +97,13 @@ def artist():
                 
         spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
         user = spotify.current_user()
-        profile_picture_url = user["images"][0]["url"]
+        
+        try:
+            profile_picture_url = user["images"][0]["url"]
+        
+        except:
+            profile_picture_url = url_for('static', filename='images/profilepicimages.png')
+        
         
            
         return render_template("index.html", your_list = test, track_list = finalTrackList, profile_picture_url=profile_picture_url)
@@ -273,7 +284,12 @@ def liked_songs():
         
     spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
     user = spotify.current_user()
-    profile_picture_url = user["images"][0]["url"]
+    
+    try:
+        profile_picture_url = user["images"][0]["url"]
+        
+    except:
+        profile_picture_url = url_for('static', filename='images/profilepicimages.png')
        
     return render_template('liked-songs.html', liked_songs=liked_songs, profile_picture_url = profile_picture_url)
 
