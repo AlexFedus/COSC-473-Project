@@ -65,16 +65,7 @@ def home():
     
     
 
-@views.route("/login", methods=["POST", "GET"])
-def loginapp():
-    if request.method == "POST":
-        user = request.form["nm"]
-        print(user)
-        return render_template("login.html")
-        #return redirect(url_for("user", usr = user))
-    else:
-        return render_template("login.html")
-    
+
     
 
 #This route displays an artists top ten songs on spotify
@@ -82,6 +73,8 @@ def loginapp():
 
 @views.route("/artist", methods =["GET", "POST"])
 def artist():
+    
+
 
         if request.method == "POST":
         #checks if access token is expired and gets a refreshed token and check if it has token data
@@ -96,9 +89,13 @@ def artist():
        
             for idx, song in enumerate(songs):
                 test.append(f"{idx + 1}. {song['name']}")
+                
+        spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
+        user = spotify.current_user()
+        profile_picture_url = user["images"][0]["url"]
         
            
-        return render_template("index.html", your_list = test, track_list = finalTrackList)
+        return render_template("index.html", your_list = test, track_list = finalTrackList, profile_picture_url=profile_picture_url)
 
 
 
@@ -272,8 +269,13 @@ def liked_songs():
             liked_songs.append({'name': song_name, 'artist': artist_name, 'image': album_art})
     else:
         liked_songs = None
+        
+        
+    spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
+    user = spotify.current_user()
+    profile_picture_url = user["images"][0]["url"]
        
-    return render_template('liked-songs.html', liked_songs=liked_songs)
+    return render_template('liked-songs.html', liked_songs=liked_songs, profile_picture_url = profile_picture_url)
 
 # Clears the cookie to logout            
 @views.route('/logout')

@@ -20,11 +20,11 @@
                 <h3>SSR - Spotify Song Recommender</h3>
                 <ul>
                     <li><a onclick="window.location.href='/'">Home</a></li>
-                    <li><a onclick="window.location.href='/login'">Login</a></li>
                     <li><a onclick="window.location.href='/artist'">Top Ten</a></li>
                     {% if request.cookies.get('session') %}
                         <li><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>
                         <li><a onclick="window.location.href='/logout'">Logout</a></li>
+                        <li><img src="{{ profile_picture_url }}" class="profile-picture"></li>
                         
 
                     {% else %}

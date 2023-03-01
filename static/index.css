@@ -70,6 +70,12 @@ ul {
     box-shadow: 3px 5px 5px rgb(0, 0, 0, 0.4);
   }
 
+  .profile-picture {
+    width: 50px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
   ul,li {
     list-style: none;
     display: flex;
