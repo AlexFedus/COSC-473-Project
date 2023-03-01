@@ -53,7 +53,17 @@ def get_spotify_object(token):
 #The route that displays our homepage
 @views.route("/")
 def home():
-    return render_template("home.html")
+    
+    if not request.cookies.get("user"):
+        return render_template("home.html")
+    
+    spotify = spotipy.Spotify(auth=request.cookies.get("user"))
+    user = spotify.current_user()
+    profile_picture_url = user["images"][0]["url"]
+    return render_template("home.html", profile_picture_url=profile_picture_url)
+    
+    
+    
 
 @views.route("/login", methods=["POST", "GET"])
 def loginapp():
@@ -220,7 +230,10 @@ def callback():
             # Redirect the user to the home page
             #return redirect(url_for('index'))
 
-            return redirect('/')
+            resp = make_response(redirect('/'))
+            resp.set_cookie('user', user.access_token)
+            return resp
+            #return redirect('/')
         return 'error'
 
   

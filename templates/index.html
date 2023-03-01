@@ -25,6 +25,8 @@
                     {% if request.cookies.get('session') %}
                         <li><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>
                         <li><a onclick="window.location.href='/logout'">Logout</a></li>
+                        
+
                     {% else %}
                         <li><a onclick="window.location.href='/spotifyLogin'">Login to Spotify</a></li>
                     {% endif %}
