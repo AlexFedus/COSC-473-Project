@@ -1,51 +1,59 @@
 body {
-    font-family: 'Montserrat';
-    font-size: 18px;
-    resize: auto;
-    background-color: white;
+  font-family: 'Montserrat';
+  font-size: 18px;
+  resize: auto;
+  background-color: white;
 }
  
- /* Nav bar */
- .navbar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-  .container{
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 7vh;
-    background-color: #24252B;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    box-shadow: 3px 5px 5px rgb(0, 0, 0, 0.4);
+.container{
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 7vh;
+  background-color: #24252B;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 3px 5px 5px rgb(0, 0, 0, 0.4);
 }
 
-  .profile-picture {
-    width: 50px;
-    height: 40px;
-    border-radius: 50%;
+.profile-picture {
+  width: 50px;
+  height: 40px;
+  border-radius: 50%;
 }
 
 .navbar,.navbarli {
-    list-style: none;
-    display: flex;
-    padding: 1em;
-    margin: 0;
+  list-style: none;
+  display: flex;
+  padding: 1em;
+  margin: 0;
 }
   
-  .navbarli {
-    cursor: pointer;
-    transition: all .5 ease-in-out;
-    margin: 0.5em;
-    padding: 10px 15px;
-    color: whitesmoke;
-    border-radius: 20px;
-    /*background-color: rgba(48, 48, 48, 0.788);*/
-    font-weight: bold;
+.navbarli {
+  cursor: pointer;
+  transition: all .5 ease-in-out;
+  margin: 0.5em;
+  padding: 10px 15px;
+  color: whitesmoke;
+  border-radius: 20px;
+  font-weight: bold;
 }
 
+.navbarli:hover {
+  background-color: green;
+  box-shadow: 3px 5px 5px;
+}
+
+h3{
+  padding: 1em;
+  color: rgb(0, 189, 0);
+  letter-spacing: 3px;
+}
