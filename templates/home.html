@@ -29,6 +29,7 @@
                 {% if request.cookies.get('session') %}
                     <li><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>
                     <li><a onclick="window.location.href='/logout'">Logout</a></li>
+                    <li><a onclick="window.location.href='/mytop'">My Top Songs</a></li>
                     <li><img src="{{ profile_picture_url }}" class="profile-picture"></li>
                 {% else %}
                     <li><a onclick="window.location.href='/spotifyLogin'">Login to Spotify</a></li>

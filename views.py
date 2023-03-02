@@ -121,7 +121,7 @@ def loginsp():
         client_id=SPOTIPY_CLIENT_ID,
         client_secret=SPOTIPY_CLIENT_SECRET,
         redirect_uri=SPOTIPY_REDIRECT_URI,
-        scope='user-library-read user-read-email user-read-private'
+        scope='user-library-read user-read-email user-top-read user-read-private'
     )
 
     #Requesting a code and turning it into a token
@@ -301,6 +301,21 @@ def logout():
     return resp
 
 
+#Gets the users top songs from each of the three terms that the spotify api allows
+@views.route('/mytop')
+def topusersongs():
+    
+    
+    spotify = spotipy.Spotify(auth=request.cookies.get("user"))
+    
+    
+    shortterm = spotify.current_user_top_tracks(limit=20, offset=0, time_range='short_term')
+    shortterm_tracks = [{"name": track["name"], "artist": track["artists"][0]["name"]} for track in shortterm["items"]]
 
-    
-    
+    mediumterm = spotify.current_user_top_tracks(limit=20, offset=0, time_range='medium_term')
+    mediumterm_tracks = [{"name": track["name"], "artist": track["artists"][0]["name"]} for track in mediumterm["items"]]
+
+    longterm = spotify.current_user_top_tracks(limit=20, offset=0, time_range='long_term')
+    longterm_tracks = [{"name": track["name"], "artist": track["artists"][0]["name"]} for track in longterm["items"]]
+        
+    return render_template('usertop.html', shortterm=shortterm_tracks, mediumterm=mediumterm_tracks, longterm=longterm_tracks)
