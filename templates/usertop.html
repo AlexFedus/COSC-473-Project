@@ -4,55 +4,59 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link href="/static/usertop.css" type="text/css" rel="stylesheet" />
     <title>My Top Songs</title>
 </head>
-<header>
-    <div class = "container">
-        <h3> SSR - Spotify Song Recommender </h3>
-        <ul class = "navbar">
-            
-            
-            <li><a onclick="window.location.href='/'">Home</a></li>
-            
-            <li><a onclick="window.location.href='/artist'">Top Ten</a></li>
-            {% if request.cookies.get('session') %}
-                <li><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>
-                <li><a onclick="window.location.href='/logout'">Logout</a></li>
-                <li><a onclick="window.location.href='/mytop'">My Top Songs</a></li>
-                <li><img src="{{ profile_picture_url }}" class="profile-picture"></li>
-            {% else %}
-                <li><a onclick="window.location.href='/spotifyLogin'">Login to Spotify</a></li>
-            {% endif %}
-            
-          </ul>
-    </div>
-</header>
 <body>
-    {% if not shortterm and not mediumterm and not longterm %}
-        <p>Not enough listening data.</p>
-    {% else %}
-        <h1>Short Term Top Tracks</h1>
-        <ul>
-        {% for track in shortterm %}
-            <li>{{ track["name"] }} by {{ track["artist"] }}</li>
-        {% endfor %}
-        </ul>
+    <header>
+        <div class = "container">
+            <h3> SSR - Spotify Song Recommender </h3>
+            <ul class = "navbar">
+            
+            
+                <li><a onclick="window.location.href='/'">Home</a></li>
+            
+                <li><a onclick="window.location.href='/artist'">Top Ten</a></li>
+                {% if request.cookies.get('session') %}
+                    <li><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>
+                    <li><a onclick="window.location.href='/logout'">Logout</a></li>
+                    <li><a onclick="window.location.href='/mytop'">My Top Songs</a></li>
+                    <li><img src="{{ profile_picture_url }}" class="profile-picture"></li>
+                {% else %}
+                    <li><a onclick="window.location.href='/spotifyLogin'">Login to Spotify</a></li>
+                {% endif %}
+            
+            </ul>
+        </div>
+    </header>
 
-        <h1>Medium Term Top Tracks</h1>
-        <ul>
-        {% for track in mediumterm %}
-            <li>{{ track["name"] }} by {{ track["artist"] }}</li>
-        {% endfor %}
-        </ul>
+    <div class = "usertop">
+        {% if not shortterm and not mediumterm and not longterm %}
+            <p>Not enough listening data.</p>
+        {% else %}
+            <h1>Short Term Top Tracks</h1>
+            <ul>
+            {% for track in shortterm %}
+                <li>{{ track["name"] }} by {{ track["artist"] }}</li>
+            {% endfor %}
+            </ul>
 
-        <h1>Long Term Top Tracks</h1>
-        <ul>
-        {% for track in longterm %}
-            <li>{{ track["name"] }} by {{ track["artist"] }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+            <h1>Medium Term Top Tracks</h1>
+            <ul>
+            {% for track in mediumterm %}
+                <li>{{ track["name"] }} by {{ track["artist"] }}</li>
+            {% endfor %}
+            </ul>
+
+            <h1>Long Term Top Tracks</h1>
+            <ul>
+            {% for track in longterm %}
+                <li>{{ track["name"] }} by {{ track["artist"] }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 
 </body>
 </html>
