@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +19,9 @@
 </head>
 <body>
     
+    <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class = "threelines" ></image>
     
+    <!--
     <header>
         <div class="container">
             <h3>SSR - Spotify Song Recommender</h3>
@@ -37,9 +40,10 @@
             </ul>
         </div>
     </header>
-    
-    <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class = "threelines" ></image>
- 
+    -->
+    <header>
+        {% extends "navbar.html"%}
+    </header>
 
 </body>
 </html>
