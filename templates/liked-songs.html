@@ -6,7 +6,9 @@
     <title>Liked Songs</title>
 </head>
 <body>
+    <!--
     <header>
+
         <div class = "container">
             <h3> SSR - Spotify Song Recommender </h3>
             <ul class = "navbar">
@@ -26,7 +28,9 @@
               </ul>
         </div>
     </header>
-
+    -->
+    {% extends "navbar.html" %}
+    {% block code %}
     <h1 class="heading">Liked Songs</h1>
     {% if liked_songs %}
         <ul class = "songs">
@@ -41,5 +45,6 @@
     {% else %}
         <p>No liked songs found.</p>
     {% endif %}
+    {% endblock %}
 </body>
 </html>

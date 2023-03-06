@@ -19,7 +19,6 @@
 </head>
 <body>
     
-    <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class = "threelines" ></image>
     
     <!--
     <header>
@@ -41,9 +40,12 @@
         </div>
     </header>
     -->
-    <header>
+    
         {% extends "navbar.html"%}
-    </header>
+        {% block image %}
+        <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class = "threelines" ></image>
+        {% endblock %}
+   
 
 </body>
 </html>

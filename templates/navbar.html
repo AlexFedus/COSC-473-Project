@@ -1,5 +1,7 @@
-
+<header>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/navbar.css')}}">
     <div class="container">
+        
         <h3>SSR - Spotify Song Recommender</h3>
         <ul>
             <li><a onclick="window.location.href='/'">Home</a></li>
@@ -13,7 +15,15 @@
             {% else %}
                 <li><a onclick="window.location.href='/spotifyLogin'">Login to Spotify</a></li>
             {% endif %}
+            
         </ul>
     </div>
+    {% block image %}
+
+    {% endblock %}
+</header>
+    {% block code %}
+    {% endblock %}
+
 
 
