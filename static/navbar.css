@@ -24,14 +24,14 @@
     border-radius: 50%;
   }
   
-  ul,li {
+  ul,.nav {
     list-style: none;
     display: flex;
     padding: 1em;
     margin: 0;
   }
   
-  li {
+  .nav {
     cursor: pointer;
     transition: all .5 ease-in-out;
     margin: 0.5em;
@@ -42,7 +42,7 @@
     font-weight: bold;
   }
   
-  li:hover {
+  .nav:hover {
     background-color: green;
     box-shadow: 3px 5px 5px;
   }
@@ -64,4 +64,13 @@
 
   .songs {
     padding-top: 5px;
+    padding-right: 150px;
+    
+  }
+
+  body {
+    font-family: 'Montserrat';
+    font-size: 18px;
+    resize: auto;
+    background-color: white;
   }
