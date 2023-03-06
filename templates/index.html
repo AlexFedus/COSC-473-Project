@@ -3,7 +3,7 @@
 <head>
     
     <title>Top Songs</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/index.css')}}">
+    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/index.css')}}">-->
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <style>
         body{
@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <header>
+    <!--
         <header>
             <div class="container">
                 <h3>SSR - Spotify Song Recommender</h3>
@@ -33,28 +33,31 @@
                 </ul>
             </div>
         </header>
-    <button class= "button" onclick="window.location.href='/'">
-        Home
-      </button>
-    <div>
-        <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class= "threelines">
-        <h1>Top 10 Songs</h1>
+    -->
+    {% extends "navbar.html"%}
+        {% block image %}
+    
+        <!--<image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class= "threelines">-->
+        {% endblock %}
+        {% block code %}
+        <h1 class="topTen">Top 10 Songs</h1>
         <form action="{{ url_for('views.artist')}}" method="post">
             <label for="artistname" class="label1">Enter an Artist:</label>
             <input type="text" id="artistname" name="aname" placeholder="Enter a artist" class="textInput">
             <button type="submit" class="searchbutton">Search</button>
         
-        <h2>
+        
+        <h2 class = "artistSongs">
         {% for your_list_element in your_list %}
             <p class= "topsongs">{{ your_list_element }} </p>
       
         {% endfor %}
         </h2>
-        
-        
-    
+        {% endblock %}
         
     
-    </div>
+        
+    
+    
 </body>
 </html>

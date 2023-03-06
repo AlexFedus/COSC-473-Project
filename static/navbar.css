@@ -4,6 +4,12 @@
     margin: 0;
     padding: 0;
   }
+
+  .bar{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
   
   .container{
     margin: 0;
@@ -24,7 +30,7 @@
     border-radius: 50%;
   }
   
-  ul,.nav {
+  .bar,.nav {
     list-style: none;
     display: flex;
     padding: 1em;
@@ -34,7 +40,7 @@
   .nav {
     cursor: pointer;
     transition: all .5 ease-in-out;
-    margin: 0.5em;
+    margin: 0em;
     padding: 10px 15px;
     color: whitesmoke;
     border-radius: 20px;
@@ -53,6 +59,7 @@
     letter-spacing: 3px;
   }
 
+  
   .heading {
     color: green;
     font-size: 50px;
@@ -73,4 +80,111 @@
     font-size: 18px;
     resize: auto;
     background-color: white;
+    padding: 0.5em;
+  }
+
+  /* Artist songs css */
+  .searchbutton {
+    position: absolute;
+    top: 20%;
+    left: 300px;
+    padding: 10px 20px;
+    border-radius: 7px;
+    border: 1px solid rgb(0, 0, 0);
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 2px;
+    background-color: #0a0a0a;
+    color: #fff;
+    overflow: hidden;
+    box-shadow: 0 0 0 0 transparent;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+  }
+
+  .threelines{
+    position: relative;
+    z-index: -1;
+    margin: auto;
+    max-width: 300px; 
+    size: 2px;
+    padding: 400px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .textInput{
+    position: absolute;
+    top: 20.5%;
+    left: 5em;
+  }
+
+  .label1{
+    position: absolute;
+    top: 18%;
+    left: 4em;
+  }
+
+  .topTen{
+    position: absolute;
+    top: 27%;
+    width: 500px;
+    border-style: solid;
+      border-width: 0.2ch;
+      border-radius: 0.1ch;
+      background-color: green;
+      color: aliceblue;
+      width: 15cm;
+      text-align: center;
+  }
+
+  .artistSongs{
+    position: absolute;
+    top: 35%;
+  }
+  
+  /* User Top css */
+  .short {
+    float: left;
+  }
+  
+  .medium {
+    float: right;
+  }
+  
+  .long {
+    float: left;
+  }
+
+  .usertop {
+    padding-top: 4%;
+  }
+
+  .timeTracks{
+    width: 500px;
+    border-style: solid;
+    border-width: 0.2ch;
+    border-radius: 0.1ch;
+    background-color: green;
+    color: aliceblue;
+    width: 15cm;
+    text-align: center;
+    margin-bottom: -10px;
+  }
+  .myTopSongs {
+    color: green;
+    font-size: 50px;
+    border-bottom: solid;
+    border-color: #24252B;
+    text-align: center;
+    margin-bottom: -5px;
+    margin-top: 20px;
+  }
+  .userTracks{
+    padding: 0.5em;
+    
+    list-style: circle;
+    list-style-position: inside;
   }

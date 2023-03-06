@@ -1,3 +1,5 @@
+
+/*
 body {
   font-family: 'Montserrat';
   font-size: 18px;
@@ -19,6 +21,7 @@ body {
 }
 
 /* Nav bar */
+/*
 .navbar {
   list-style: none;
   display: flex;
@@ -47,10 +50,11 @@ body {
   padding: 10px 15px;
   color: whitesmoke;
   border-radius: 20px;
-  /*background-color: rgba(48, 48, 48, 0.788);*/
-  font-weight: bold;
-}
   
+  font-weight: bold;
+  
+}
+
 .navbarli:hover {
   background-color: green;
   box-shadow: 3px 5px 5px;
@@ -63,7 +67,7 @@ h3 {
 }
 
 /* Songs */
-
+/*
 .songs {
   padding-top: 5px;
 }
@@ -74,6 +78,7 @@ h3 {
   border-bottom: solid;
   border-color: #24252B;
   text-align: center;
- /* padding-top: 65px; */
+  padding-top: 65px; 
 }
+*/
   
