@@ -32,7 +32,7 @@ body {
   color: white;
 }
 
-.navbarli {
+.navbar li {
   cursor: pointer;
   transition: all .5 ease-in-out;
   margin: 0.5em;
@@ -42,7 +42,7 @@ body {
   font-weight: bold;
 }
 
-.navbarli:hover {
+.navbar li:hover {
   background-color: green;
   box-shadow: 3px 5px 5px;
 }
@@ -67,4 +67,26 @@ h1 {
 
 .usertop {
   padding-top: 4%;
+}
+
+.short {
+  float: left;
+}
+
+.medium {
+  float: right;
+}
+
+.long {
+  float: left;
+}
+
+h2 {
+  color: green;
+  font-size: 50px;
+  border-bottom: solid;
+  border-color: #24252B;
+  text-align: center;
+  margin-bottom: -5px;
+  margin-top: 20px;
 }
