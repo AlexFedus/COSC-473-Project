@@ -317,5 +317,14 @@ def topusersongs():
 
     longterm = spotify.current_user_top_tracks(limit=20, offset=0, time_range='long_term')
     longterm_tracks = [{"name": track["name"], "artist": track["artists"][0]["name"]} for track in longterm["items"]]
+
+    spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
+    user = spotify.current_user()
+
+    try:
+            profile_picture_url = user["images"][0]["url"]
         
-    return render_template('usertop.html', shortterm=shortterm_tracks, mediumterm=mediumterm_tracks, longterm=longterm_tracks)
+    except:
+            profile_picture_url = url_for('static', filename='images/profilepicimages.png')
+        
+    return render_template('usertop.html', shortterm=shortterm_tracks, mediumterm=mediumterm_tracks, longterm=longterm_tracks, profile_picture_url=profile_picture_url)
