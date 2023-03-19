@@ -328,3 +328,19 @@ def topusersongs():
             profile_picture_url = url_for('static', filename='images/profilepicimages.png')
         
     return render_template('usertop.html', shortterm=shortterm_tracks, mediumterm=mediumterm_tracks, longterm=longterm_tracks, profile_picture_url=profile_picture_url)
+
+#Gets a users top artists
+@views.route('/mytopartists')
+def topuserartists():
+    
+    spotify = spotipy.Spotify(auth=request.cookies.get("user"))
+    
+    # Retrieve the user's top artists from Spotify's API
+    short_term = spotify.current_user_top_artists(limit=20, offset=0, time_range='short_term')
+    medium_term = spotify.current_user_top_artists(limit=20, offset=0, time_range='medium_term')
+    long_term = spotify.current_user_top_artists(limit=20, offset=0, time_range='long_term')
+    
+    print(short_term)
+
+    # Render the template with the top artists data
+    return render_template('user_top_artists.html', short_term=short_term, medium_term=medium_term, long_term=long_term)

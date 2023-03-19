@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Top Artists</title>
+  </head>
+  <body>
+    <h1>My Top Artists</h1>
+
+    <h2>Short Term</h2>
+    {% if short_term['items'] %}
+      <ul>
+        {% for artist in short_term['items'] %}
+          <li>{{ artist['name'] }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Not enough listening data.</p>
+    {% endif %}
+
+    <h2>Medium Term</h2>
+    {% if medium_term['items'] %}
+      <ul>
+        {% for artist in medium_term['items'] %}
+          <li>{{ artist['name'] }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Not enough listening data.</p>
+    {% endif %}
+
+    <h2>Long Term</h2>
+    {% if long_term['items'] %}
+      <ul>
+        {% for artist in long_term['items'] %}
+          <li>{{ artist['name'] }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Not enough listening data.</p>
+    {% endif %}
+  </body>
+</html>
