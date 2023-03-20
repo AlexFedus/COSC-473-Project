@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  </head>
+  <body>
+    {% extends "navbar.html" %}
+    {% block code %}
+    <li>
+    <input type = "checkbox" id = "topsongs" name = "topsongscheckbox" value = "songs" class = "checkInput">
+    <label for="topsongs" class = "label1"> Include Your Top Songs?</label>
+    </li>
+    <li>
+    <input type = "checkbox" id = "topartists" name = "topsongscheckbox" value = "songs" class = "checkInput2">
+    <label for="topartists" class = "label2"> Include Your Top Artists?</label>
+    </li>
+    <li>
+    <input type = "checkbox" id = "likedSongs" name = "topsongscheckbox" value = "songs" class = "checkInput3">
+    <label for="likedSongs" class = "label3"> Include Your Liked Songs?</label>
+    </li>
+    {% endblock %}
+  </body>
+</html>

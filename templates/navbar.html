@@ -7,6 +7,8 @@
             <li class = "nav"><a onclick="window.location.href='/'">Home</a></li>
             
             <li class = "nav"><a onclick="window.location.href='/artist'">Top Ten</a></li>
+            <li class = "nav"><a onclick="window.location.href='/recommendsong'">Find a Song</a></li>
+
             {% if request.cookies.get('session') %}
                 <!--
                 <li class = "nav"><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>

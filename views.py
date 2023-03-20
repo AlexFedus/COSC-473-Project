@@ -353,3 +353,16 @@ def topuserartists():
 
     # Render the template with the top artists data
     return render_template('user_top_artists.html', short_term=short_term, medium_term=medium_term, long_term=long_term, profile_picture_url=profile_picture_url)
+
+@views.route('/recommendsong')
+def recommendsong():
+
+    spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
+    user = spotify.current_user()
+        
+    try:
+        profile_picture_url = user["images"][0]["url"]
+        
+    except:
+        profile_picture_url = url_for('static', filename='images/profilepicimages.png')
+    return render_template('recommendsong.html', profile_picture_url = profile_picture_url)
