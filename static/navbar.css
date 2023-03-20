@@ -176,13 +176,15 @@
     margin-bottom: -10px;
   }
   .myTopSongs {
+    position: relative;
     color: green;
     font-size: 50px;
     border-bottom: solid;
     border-color: #24252B;
     text-align: center;
     margin-bottom: -5px;
-    margin-top: 20px;
+    margin-top: 33px;
+    
   }
   .userTracks{
     padding: 0.5em;

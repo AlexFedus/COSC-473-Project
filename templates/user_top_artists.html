@@ -1,42 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <title>My Top Artists</title>
   </head>
   <body>
-    <h1>My Top Artists</h1>
-
-    <h2>Short Term</h2>
+    {% extends "navbar.html" %}
+    {% block code %}
+    <div class = "usertop">
+    <h1 class ="myTopSongs">My Top Artists</h1>
+    <div class = "short">
+    <h2 class = "timeTracks">Short Term</h2>
     {% if short_term['items'] %}
       <ul>
         {% for artist in short_term['items'] %}
-          <li>{{ artist['name'] }}</li>
+          <li class = "userTracks">{{ artist['name'] }}</li>
         {% endfor %}
       </ul>
     {% else %}
       <p>Not enough listening data.</p>
     {% endif %}
-
-    <h2>Medium Term</h2>
+    </div>
+    <div class = "medium">
+    <h2 class = "timeTracks">Medium Term</h2>
     {% if medium_term['items'] %}
       <ul>
         {% for artist in medium_term['items'] %}
-          <li>{{ artist['name'] }}</li>
+          <li class = "userTracks">{{ artist['name'] }}</li>
         {% endfor %}
       </ul>
     {% else %}
       <p>Not enough listening data.</p>
     {% endif %}
-
-    <h2>Long Term</h2>
+    </div>
+    <div class = "long">
+    <h2 class = "timeTracks">Long Term</h2>
     {% if long_term['items'] %}
       <ul>
         {% for artist in long_term['items'] %}
-          <li>{{ artist['name'] }}</li>
+          <li class = "userTracks">{{ artist['name'] }}</li>
         {% endfor %}
       </ul>
     {% else %}
       <p>Not enough listening data.</p>
     {% endif %}
+    </div>
+    </div>
+    {% endblock %}
   </body>
 </html>
