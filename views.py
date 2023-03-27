@@ -65,10 +65,11 @@ def home():
     except:
         profile_picture_url = url_for('static', filename='images/profilepicimages.png')
         
-    return render_template("home.html", profile_picture_url=profile_picture_url)
+    topfiftytracks = get_top_tracks()
+    return render_template("home.html", top_tracks = topfiftytracks, profile_picture_url=profile_picture_url)
 
-    top_tracks = get_top_tracks()
-    return render_template("home.html", top_tracks=top_tracks)
+    #top_tracks = get_top_tracks()
+    #return render_template("home.html", top_tracks=top_tracks)
 
 
     
