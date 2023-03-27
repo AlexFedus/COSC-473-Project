@@ -271,3 +271,40 @@
   top: 28%;
   left: 4em;
 }
+
+.genrelabel{
+  position: absolute;
+  top: 13em;
+  left: 23em;
+}
+
+.genretext{
+  position: absolute;
+  top: 18em;
+  left: 40em;
+}
+
+.yearlabel{
+  position: absolute;
+  top: 15em;
+  left: 23em;
+}
+
+.yeartext{
+  position: absolute;
+  top: 20.5em;
+  left: 40em;
+}
+
+.popularitylabel{
+  position: absolute;
+  top: 17em;
+  left: 23em;
+}
+
+.popularitytext{
+  position: absolute;
+  top: 23em;
+  left: 40em;
+}
+

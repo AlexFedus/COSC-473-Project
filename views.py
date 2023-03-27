@@ -4,9 +4,10 @@ from SpotifyAPI import getartisttopten
 import spotipy
 from spotipy import Spotify
 from flask_sqlalchemy import SQLAlchemy
-from spotipy.oauth2 import SpotifyOAuth
+from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
 import datetime
 from datetime import timedelta
+import random
 
 """
 This file contains all the code for each of the different routes on 
@@ -24,7 +25,8 @@ SPOTIPY_CLIENT_SECRET = 'ae50126def9a4e96a344385597ab9443'
 SPOTIPY_REDIRECT_URI = 'http://127.0.0.1:8000/callback'
 SCOPE = 'user-library-read user-read-email user-top-read user-read-private'
 
-
+client_credentials_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 views = Blueprint(__name__,"views")
 
 db = SQLAlchemy()
@@ -354,15 +356,46 @@ def topuserartists():
     # Render the template with the top artists data
     return render_template('user_top_artists.html', short_term=short_term, medium_term=medium_term, long_term=long_term, profile_picture_url=profile_picture_url)
 
-@views.route('/recommendsong')
+@views.route('/recommendsong', methods=['GET', 'POST'])
 def recommendsong():
 
     spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
     user = spotify.current_user()
-        
+
     try:
         profile_picture_url = user["images"][0]["url"]
         
     except:
         profile_picture_url = url_for('static', filename='images/profilepicimages.png')
-    return render_template('recommendsong.html', profile_picture_url = profile_picture_url)
+
+    if request.method == "POST":
+        genre = request.form['genre']
+        year = request.form['year']
+        popularity = request.form['popularity']
+
+        # Use Spotipy to search for songs matching the input parameters
+        #query = f'genre:"{genre}" year:{year}-01-01 TO {year}-12-31'
+        query = 'genre:"{}" year:{} popularity:{}..100'.format(genre, year, popularity)
+        print(query)
+        results = sp.search(q=query, type='track', market='US', limit=50)
+        print(results)
+        # Filter songs by popularity if requested
+        #if popularity:
+            #results['tracks']['items'] = [item for item in results['tracks']['items'] if item['popularity'] >= int(popularity)]
+
+    # Randomly select a song from the filtered results
+        if len(results['tracks']['items']) > 0:
+            track = random.choice(results['tracks']['items'])
+            track_name = track['name']
+            artist_name = track['artists'][0]['name']
+            preview_url = track['preview_url']
+            #song = random.choice(results['tracks']['items'])
+            #print(f"Random song: {song['name']} by {song['artists'][0]['name']}")
+            print(track_name)
+            return render_template('recommendsong.html', profile_picture_url=profile_picture_url)
+        else:
+            return "No songs found matching the input parameters"
+        
+    else:
+        return render_template('recommendsong.html', profile_picture_url=profile_picture_url)
+    #return render_template('recommendsong.html', profile_picture_url = profile_picture_url)

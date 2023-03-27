@@ -19,9 +19,15 @@
     <label for="likedSongs" class = "label3"> Include Your Liked Songs?</label>
     </li>
 
-    <input type = "text" id = "genre" name = "genresearch" placeholder="enter a genre">
-    <input type = "text" id = "year" name = "yearsearch" placeholder="enter a year">
-    <input type = "text" id = "popularity" name = "popularitysearch" placeholder="enter a popularity">
+    <form action="/recommendsong" method="post">
+      <label for="genre" class="genrelabel">Genre:</label>
+      <input type="text" id="genre" name="genre" class="genretext"><br>
+      <label for="year" class="yearlabel">Year:</label>
+      <input type="text" id="year" name="year" class="yeartext"><br>
+      <label for="popularity" class="popularitylabel">Popularity:</label>
+      <input type="text" id="popularity" name="popularity" class="popularitytext"><br>
+      <input type="submit" value="Search">
+    </form>
     {% endblock %}
   </body>
 </html>
