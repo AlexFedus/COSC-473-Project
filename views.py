@@ -1,6 +1,7 @@
 from flask import Blueprint, make_response, render_template, request,  redirect , session, url_for
 import requests
 from SpotifyAPI import getartisttopten
+from SpotifyAPI import get_top_tracks
 import spotipy
 from spotipy import Spotify
 from flask_sqlalchemy import SQLAlchemy
@@ -53,7 +54,6 @@ def get_spotify_object(token):
 #The route that displays our homepage
 @views.route("/")
 def home():
-    
     if not request.cookies.get("user"):
         return render_template("home.html")
     
@@ -66,6 +66,11 @@ def home():
         profile_picture_url = url_for('static', filename='images/profilepicimages.png')
         
     return render_template("home.html", profile_picture_url=profile_picture_url)
+
+    top_tracks = get_top_tracks()
+    return render_template("home.html", top_tracks=top_tracks)
+
+
     
     
     
@@ -353,3 +358,4 @@ def topuserartists():
 
     # Render the template with the top artists data
     return render_template('user_top_artists.html', short_term=short_term, medium_term=medium_term, long_term=long_term, profile_picture_url=profile_picture_url)
+

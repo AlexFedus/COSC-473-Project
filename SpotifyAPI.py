@@ -4,6 +4,9 @@ import base64
 from requests import post, get
 import json
 
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+
 
 test = []
 userSavedTracks = []
@@ -75,3 +78,33 @@ def getartisttopten(artist):
 
     return songs
 
+
+
+#For top 50 songs in USA on homepage
+def get_top_tracks():
+    load_dotenv()
+    client_id = os.getenv("CLIENT_ID")
+    client_secret = os.getenv("CLIENT_SECRET")
+
+    # Set up Spotipy client
+    client_credentials_manager = SpotifyClientCredentials (
+        client_id = client_id,
+        client_secret = client_secret
+    ) 
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
+    # Get tracks from "Top 50 - USA" playlist
+    playlist = sp.user_playlist_tracks(user='spotify', playlist_id='37i9dQZEVXbLRQDuF5jeBp', limit=50)
+
+    # Extract relevant information for each track
+    top_tracks = []
+    for item in playlist['items']:
+        track = item['track']
+        track_info = {
+            'name': track['name'],
+            'artist': track['artists'][0]['name'],
+            'image': track['album']['images'][0]['url']
+        }
+        top_tracks.append(track_info)
+
+    return top_tracks
