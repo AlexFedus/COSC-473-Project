@@ -42,19 +42,21 @@
     -->
     
         {% extends "navbar.html" %}
-        
-        {% block image %}
-        <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class = "threelines" ></image>
-        {% endblock %}
-        
+
         {% block code %}
-            <h1 class = "topfifty">Top 50 Tracks - USA</h1>
+            <h1 class = "topfifty">Top 10 Tracks - USA</h1>
             <ul class = "trackfifty">
             {% for track in top_tracks %}
                 <li class = "trackfifty">{{ track['name'] }} - {{ track['artist'] }}</li>
             {% endfor %}
             </ul>
         {% endblock %}
+        
+        {% block image %}
+        <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class = "threelines" ></image>
+        {% endblock %}
+        
+        
         
 
         

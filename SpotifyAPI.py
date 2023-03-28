@@ -94,7 +94,7 @@ def get_top_tracks():
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
     # Get tracks from "Top 50 - USA" playlist
-    playlist = sp.user_playlist_tracks(user='spotify', playlist_id='37i9dQZEVXbLRQDuF5jeBp', limit=50)
+    playlist = sp.user_playlist_tracks(user='spotify', playlist_id='37i9dQZEVXbLRQDuF5jeBp', limit=10)
 
     # Extract relevant information for each track
     top_tracks = []
