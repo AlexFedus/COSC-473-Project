@@ -375,6 +375,7 @@ def randomsong():
         random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name)
         random_song_name = random_song['name']
         random_song_art = random_song['album']['images'][0]['url']
+        print(random_song_name)
         print(random_song_art)
     return render_template('randomsong.html', genre_song = random_song_name, album_art = random_song_art)
 
