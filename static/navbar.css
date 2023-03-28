@@ -254,3 +254,17 @@
   top: 6em;
   left: 6em;
 }
+
+.genresongs{
+  position: absolute;
+  top: 35%;
+}
+
+.album-art{
+  position: relative;
+  top: 30em;
+  left: 30em;
+  height: 100;
+  width: 100;
+  z-index: 2;
+}

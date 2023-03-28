@@ -108,3 +108,23 @@ def get_top_tracks():
         top_tracks.append(track_info)
 
     return top_tracks
+
+def get_track_by_genre(genre, sp):
+    # set seed genre
+    seed_genres = [genre]
+
+    # get recommendations based on seed genres
+    results = sp.recommendations(seed_genres=seed_genres, limit=1)
+
+    # check to see if there are any tracks in the list
+    if len(results['tracks']) > 0:
+        
+    # extract track information
+        track_name = results['tracks'][0]['name']
+        artist_name = results['tracks'][0]['artists'][0]['name']
+        album_name = results['tracks'][0]['album']['name']
+        album_art = results['tracks'][0]['album']['images'][0]['url']
+
+    # return track information as dictionary
+        return {'track_name': track_name, 'artist_name': artist_name, 'album_name': album_name, 'album_art': album_art}
+    return None

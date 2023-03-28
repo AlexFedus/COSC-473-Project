@@ -1,13 +1,15 @@
-from flask import Blueprint, make_response, render_template, request,  redirect , session, url_for
+from flask import Blueprint, make_response, render_template, request,  redirect , session, url_for, flash
 import requests
 from SpotifyAPI import getartisttopten
-from SpotifyAPI import get_top_tracks
+from SpotifyAPI import get_top_tracks, get_track_by_genre
 import spotipy
 from spotipy import Spotify
 from flask_sqlalchemy import SQLAlchemy
-from spotipy.oauth2 import SpotifyOAuth
+from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
 import datetime
 from datetime import timedelta
+from spotipy_random import get_random
+import random
 
 """
 This file contains all the code for each of the different routes on 
@@ -360,3 +362,20 @@ def topuserartists():
     # Render the template with the top artists data
     return render_template('user_top_artists.html', short_term=short_term, medium_term=medium_term, long_term=long_term, profile_picture_url=profile_picture_url)
 
+@views.route('/randomsong', methods =["GET", "POST"])
+def randomsong():
+
+    random_song = ""
+    random_song_name = ""
+    random_song_art = ""
+    if request.method == "POST":
+        
+        genre_name = request.form.get("genrename")
+        spotify_client = spotipy.Spotify(auth=request.cookies.get("user"))
+        random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name)
+        random_song_name = random_song['name']
+        random_song_art = random_song['album']['images'][0]['url']
+        print(random_song_art)
+    return render_template('randomsong.html', genre_song = random_song_name, album_art = random_song_art)
+
+    
