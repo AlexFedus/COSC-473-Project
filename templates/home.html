@@ -20,52 +20,27 @@
 <body>
     
     
-    <!--
-    <header>
-        <div class="container">
-            <h3>SSR - Spotify Song Recommender</h3>
-            <ul>
-                <li><a onclick="window.location.href='/'">Home</a></li>
-                
-                <li><a onclick="window.location.href='/artist'">Top Ten</a></li>
-                {% if request.cookies.get('session') %}
-                    <li><a onclick="window.location.href='/liked-songs'">My Liked Songs</a></li>
-                    <li><a onclick="window.location.href='/logout'">Logout</a></li>
-                    <li><a onclick="window.location.href='/mytop'">My Top Songs</a></li>
-                    <li><img src="{{ profile_picture_url }}" class="profile-picture"></li>
-                {% else %}
-                    <li><a onclick="window.location.href='/spotifyLogin'">Login to Spotify</a></li>
-                {% endif %}
-            </ul>
+    {% extends "navbar.html" %}
+    {% block content %}
+        {% block code %}
+        <div class="topten">
+            <h2 class = "topfifty">USA Top 10 Tracks</h2>
+            <ol class = "trackfifty">
+                {% for track in top_tracks %}
+                    <li class = "tracklist"><img src="{{ track.image }}" width="100" height="100"> {{ track['name'] }} - {{ track['artist'] }}</li>
+                {% endfor %}
+            </ol>
+            <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class = "threelines" ></image>
         </div>
-    </header>
-    -->
-    
-        {% extends "navbar.html" %}
-
-        {% block content %}
-            {% block code %}
-            <div class="topten">
-                <h2 class = "topfifty">USA Top 10 Tracks</h2>
-                <ol class = "trackfifty">
-                    {% for track in top_tracks %}
-                        <li class = "tracklist"><img src="{{ track.image }}" width="100" height="100"> {{ track['name'] }} - {{ track['artist'] }}</li>
-                    {% endfor %}
-                </ol>
-            </div>
-            {% endblock %}
-
-            {% block image %}
-                <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class = "threelines" ></image>
-            {% endblock %}
         {% endblock %}
 
-        
-        
-        
+       
+    {% endblock %}
+
+
 
         
-   
-
+        
+    
 </body>
 </html>
