@@ -368,15 +368,38 @@ def randomsong():
     random_song = ""
     random_song_name = ""
     random_song_art = ""
+    random_song_artist = ""
+    random_song_uri = ""
+    #genre_name = ""
+    #year_name = ""
+    spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
+    user = spotify.current_user()
+        
+    try:
+        profile_picture_url = user["images"][0]["url"]
+        
+    except:
+        profile_picture_url = url_for('static', filename='images/profilepicimages.png')
     if request.method == "POST":
         
         genre_name = request.form.get("genrename")
+        year_name = request.form.get("yearname")
+        
         spotify_client = spotipy.Spotify(auth=request.cookies.get("user"))
-        random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name)
+        if year_name:
+            random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name, year = year_name)
+        else:
+            random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name)
+        
         random_song_name = random_song['name']
         random_song_art = random_song['album']['images'][0]['url']
+        random_song_artist = random_song['artists'][0]['name']
+        random_song_uri = random_song['uri']
         print(random_song_name)
         print(random_song_art)
-    return render_template('randomsong.html', genre_song = random_song_name, album_art = random_song_art)
+        print(random_song_artist)
+        print(random_song_uri)
+        #genre_name_echo = genre_name, year_name_echo = year_name
+    return render_template('randomsong.html', genre_song = random_song_name, album_art = random_song_art, artist_name = random_song_artist, profile_picture_url = profile_picture_url)
 
     

@@ -257,14 +257,72 @@
 
 .genresongs{
   position: absolute;
-  top: 35%;
+  top: 30em;
+  left: 4em;
+  text-shadow: green;
+  text-decoration: solid;
+  text-decoration-color: green;
 }
 
 .album-art{
-  position: relative;
-  top: 30em;
-  left: 30em;
-  height: 100;
-  width: 100;
-  z-index: 2;
+  position: absolute;
+  top: 17em;
+  left: 5em;
+  height: 10em;
+  width: 10em;
+  
+}
+
+.album-div{
+  height: 11.7em;
+  width: 11.7em;
+
+  position: absolute;
+  top: 16em;
+  left: 4em;
+  background-color: green;
+
+  border-radius: 10px;
+  border-style: solid; 
+  border-color: #0a0a0a;
+  overflow: hidden;
+  z-index: -1;
+}
+
+
+.label12{
+  position: absolute;
+  top: 24%;
+  left: 4em;
+}
+
+.textInput2{
+  
+  position: absolute;
+  top: 26.5%;
+  left: 5em;
+  
+}
+/*
+.label13{
+  position: absolute;
+  top: 24%;
+  left: 34em;
+}
+
+.textInput3{
+  
+  position: absolute;
+  top: 26.5%;
+  left: 35em;
+  
+}
+*/
+.userInput{
+  position: absolute;
+  top: 35em;
+  left: 4em;
+  text-shadow: green;
+  text-decoration: solid;
+  text-decoration-color: green;
 }

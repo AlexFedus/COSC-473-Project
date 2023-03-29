@@ -5,16 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-   
+    
     <title>Find a Song</title>
 </head>
 <body>
    
     {% extends "navbar.html"%}
+    {% block image %}
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    {% endblock %}
     {% block code %}
     <form action="{{ url_for('views.randomsong')}}" method="post">
         <label for="genrename" class="label1">Enter a Genre:</label>
         <input type="text" id="genrename" name="genrename" placeholder="Enter a Genre" class="textInput">
+        <label for="yearname" class="label12">Enter a Year:</label>
+        <input type="text" id="yearname" name="yearname" placeholder="Enter a Year" class="textInput2">
+        <!--
+        <label for="popularityname" class="label13">Enter a Popularity Score:</label>
+        <input type="text" id="popularityname" name="popularityname" placeholder="Popularity Score 0-100" class="textInput3">
+        -->
         <button type="submit" class="searchbutton">Search</button>
       </form>
 
@@ -22,12 +31,19 @@
       <h2 class = "aritstsongs">
         
         {% if genre_song %}
-        <p class= "genresongs">{{ genre_song }} </p>
+        <p class= "genresongs">{{ genre_song }} - {{ artist_name }}</p>
+        
+        
+        
         {% if album_art %}
         <img class = "album-art" src = "{{ album_art }}" alt = "Album Art">
+        <div class="album-div"></div>
         {% endif %}
         {% endif %}
-      
+       
+        
+        
+    
       </h2>
     {% endblock %}
     </body>
