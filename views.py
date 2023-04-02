@@ -143,6 +143,7 @@ def loginsp():
         #They are added, if they are, their tokens are updated
         #The user is then redirected to the homepage after logging in.
         sp = spotipy.Spotify(auth=access_token)
+      
         user_info = sp.current_user()
         user = User.query.filter_by(spotify_id=user_info['id']).first()
         if not user:
@@ -164,6 +165,7 @@ def loginsp():
         return redirect('/')
     else:
         auth_url = sp_oauth.get_authorize_url()
+        
         return redirect(auth_url)
     
 
@@ -254,12 +256,11 @@ def callback():
 
   
   
-    
-# Top songs route
+
+
+
 @views.route('/liked-songs')
 def liked_songs():
-    
-    
     user_id = session.get('user_id')
     if not user_id:
         # If the user is not logged in, redirect them to the login page
@@ -272,7 +273,7 @@ def liked_songs():
     
     # Make a request to the Spotify API for the user's saved tracks (i.e., liked songs)
     headers = {'Authorization': 'Bearer ' + access_token}
-    response = requests.get('https://api.spotify.com/v1/me/tracks', headers=headers, params={'limit': 10})
+    response = requests.get('https://api.spotify.com/v1/me/tracks', headers=headers)
     print(response.text)
     
     # Parse the response and extract the relevant information
@@ -285,21 +286,37 @@ def liked_songs():
             song_name = track['name']
             artist_name = track['artists'][0]['name']
             album_art = track['album']['images'][0]['url']
-            liked_songs.append({'name': song_name, 'artist': artist_name, 'image': album_art})
+            track_id = track['id']
+            track_uri = 'spotify:track:' + track_id
+            track_link = f'https://open.spotify.com/track/{track_id}'
+            liked_songs.append({'name': song_name, 'artist': artist_name, 'image': album_art, 'uri': track_uri, 'link': track_link})
+        
+        # Check if there are more tracks available and make additional requests if needed
+        while data['next']:
+            response = requests.get(data['next'], headers=headers)
+            data = response.json()
+            for item in data['items']:
+                track = item['track']
+                song_name = track['name']
+                artist_name = track['artists'][0]['name']
+                album_art = track['album']['images'][0]['url']
+                track_id = track['id']
+                track_uri = 'spotify:track:' + track_id
+                track_link = f'https://open.spotify.com/track/{track_id}'
+                liked_songs.append({'name': song_name, 'artist': artist_name, 'image': album_art, 'uri': track_uri, 'link': track_link})
     else:
         liked_songs = None
-        
         
     spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
     user = spotify.current_user()
     
     try:
         profile_picture_url = user["images"][0]["url"]
-        
     except:
         profile_picture_url = url_for('static', filename='images/profilepicimages.png')
        
     return render_template('liked-songs.html', liked_songs=liked_songs, profile_picture_url = profile_picture_url)
+
 
 # Clears the cookie to logout            
 @views.route('/logout')
@@ -315,7 +332,7 @@ def topusersongs():
     
     
     spotify = spotipy.Spotify(auth=request.cookies.get("user"))
-    
+
     
     shortterm = spotify.current_user_top_tracks(limit=20, offset=0, time_range='short_term')
     shortterm_tracks = [{"name": track["name"], "artist": track["artists"][0]["name"]} for track in shortterm["items"]]
@@ -370,6 +387,7 @@ def randomsong():
     random_song_art = ""
     random_song_artist = ""
     random_song_uri = ""
+    random_song_link = ""
     #genre_name = ""
     #year_name = ""
     spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
@@ -394,12 +412,17 @@ def randomsong():
         random_song_name = random_song['name']
         random_song_art = random_song['album']['images'][0]['url']
         random_song_artist = random_song['artists'][0]['name']
-        random_song_uri = random_song['uri']
+        #random_song_uri = random_song['uri']
+        
+        random_song_id = random_song['id']
+        random_song_uri = 'spotify:track:' + random_song_id
+        random_song_link = f'https://open.spotify.com/track/{random_song_id}'
+        
         print(random_song_name)
         print(random_song_art)
         print(random_song_artist)
         print(random_song_uri)
         #genre_name_echo = genre_name, year_name_echo = year_name
-    return render_template('randomsong.html', genre_song = random_song_name, album_art = random_song_art, artist_name = random_song_artist, profile_picture_url = profile_picture_url)
+    return render_template('randomsong.html', genre_song = random_song_name, album_art = random_song_art, artist_name = random_song_artist, link = random_song_link, profile_picture_url = profile_picture_url)
 
     

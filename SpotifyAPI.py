@@ -100,10 +100,13 @@ def get_top_tracks():
     top_tracks = []
     for item in playlist['items']:
         track = item['track']
+        track_id = track['id']
         track_info = {
             'name': track['name'],
             'artist': track['artists'][0]['name'],
-            'image': track['album']['images'][0]['url']
+            'image': track['album']['images'][0]['url'],
+            'track_uri' : 'spotify:track:' + track_id,
+            'track_link' : f'https://open.spotify.com/track/{track_id}'
         }
         top_tracks.append(track_info)
 

@@ -36,7 +36,12 @@
         
         
         {% if album_art %}
-        <img class = "album-art" src = "{{ album_art }}" alt = "Album Art">
+
+          <a href="{{ link }}">
+            <img class = "album-art" src = "{{ album_art }}" alt = "Album Art">
+          </a>
+
+        
         <div class="album-div"></div>
         {% endif %}
         {% endif %}

@@ -25,11 +25,22 @@
         {% block code %}
         <div class="topten">
             <h2 class = "topfifty">USA Top 10 Tracks</h2>
-            <ol class = "trackfifty">
+            <ol class="trackfifty">
                 {% for track in top_tracks %}
+                  <li class="tracklist">
+                    <a href="{{ track.track_link }}" target="_blank">
+                      <img src="{{ track.image }}" width="100" height="100">
+                    </a>
+                    {{ track['name'] }} - {{ track['artist'] }}
+                  </li>
+                {% endfor %}
+              </ol>
+            <!--<ol class = "trackfifty">
+                {% for track in top_tracks %}
+                   
                     <li class = "tracklist"><img src="{{ track.image }}" width="100" height="100"> {{ track['name'] }} - {{ track['artist'] }}</li>
                 {% endfor %}
-            </ol>
+            </ol> -->
             <image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class = "threelines" ></image>
         </div>
         {% endblock %}
