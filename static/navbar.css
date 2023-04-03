@@ -303,6 +303,20 @@
   left: 5em;
   
 }
+
+.label21{
+  position: absolute;
+  top: 13%;
+  left: 4em;
+}
+
+.textInput4{
+  
+  position: absolute;
+  top: 15.5%;
+  left: 5em;
+  
+}
 /*
 .label13{
   position: absolute;
@@ -325,4 +339,11 @@
   text-shadow: green;
   text-decoration: solid;
   text-decoration-color: green;
+}
+
+.popularity{
+  position: absolute;
+  top: 40em;
+  left: 4em;
+  text-shadow: green;
 }

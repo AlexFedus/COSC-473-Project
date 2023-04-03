@@ -403,14 +403,19 @@ def randomsong():
         
         genre_name = request.form.get("genrename")
         year_name = request.form.get("yearname")
+        popularity = request.form.get("popularity")
         
         spotify_client = spotipy.Spotify(auth=request.cookies.get("user"))
-        if year_name:
+        if year_name and popularity:
             #replace get_random with spotifyAPI function    
-            random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name, year = year_name)    
+            random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name, year = year_name, popularity = popularity)  
             #random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name, year = year_name)
+        elif year_name:
+            random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name, year = year_name)
+        elif popularity:
+            random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name, popularity = popularity)   
         else:
-            random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name)    
+            random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name)
 
             #random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name)
         
@@ -426,10 +431,14 @@ def randomsong():
         
     return render_template('randomsong.html', genre_song = random_song_name, album_art = random_song_art, artist_name = random_song_artist, link = random_song_link, profile_picture_url = profile_picture_url)
 
-#create a function to get a random song from the spotify API using user intput of genre and year
-def get_random_songAPI(spotify, type, genre, year): 
-    if year:
-        random_songAPI = spotify.recommendations(seed_genres = [genre], target_year = year, limit = 1) 
+#add parameter for popularity
+def get_random_songAPI(spotify, type, genre, year, popularity): 
+    if year and popularity:
+        random_songAPI = spotify.recommendations(seed_genres = [genre], target_year = year, limit = 1, min_popularity = popularity) 
+    elif year:
+        random_songAPI = spotify.recommendations(seed_genres = [genre], target_year = year, limit = 1)
+    elif popularity:
+        random_songAPI = spotify.recommendations(seed_genres = [genre], limit = 1, min_popularity = popularity)
     else:
         random_songAPI = spotify.recommendations(seed_genres = [genre], limit = 1)
     print(random_songAPI['tracks'][0]['name'])
