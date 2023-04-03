@@ -398,6 +398,7 @@ def randomsong():
         
     except:
         profile_picture_url = url_for('static', filename='images/profilepicimages.png')
+    
     if request.method == "POST":
         
         genre_name = request.form.get("genrename")
@@ -405,24 +406,36 @@ def randomsong():
         
         spotify_client = spotipy.Spotify(auth=request.cookies.get("user"))
         if year_name:
-            random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name, year = year_name)
+            #replace get_random with spotifyAPI function    
+            random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name, year = year_name)    
+            #random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name, year = year_name)
         else:
-            random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name)
+            random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name)    
+
+            #random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name)
         
-        random_song_name = random_song['name']
-        random_song_art = random_song['album']['images'][0]['url']
-        random_song_artist = random_song['artists'][0]['name']
+        random_song_name = random_song['tracks'][0]['name']
+        random_song_art = random_song['tracks'][0]['album']['images'][0]['url']
+        random_song_artist = random_song['tracks'][0]['artists'][0]['name']
         #random_song_uri = random_song['uri']
         
-        random_song_id = random_song['id']
+        random_song_id = random_song['tracks'][0]['id']
         random_song_uri = 'spotify:track:' + random_song_id
         random_song_link = f'https://open.spotify.com/track/{random_song_id}'
         
-        print(random_song_name)
-        print(random_song_art)
-        print(random_song_artist)
-        print(random_song_uri)
-        #genre_name_echo = genre_name, year_name_echo = year_name
+        
     return render_template('randomsong.html', genre_song = random_song_name, album_art = random_song_art, artist_name = random_song_artist, link = random_song_link, profile_picture_url = profile_picture_url)
+
+#create a function to get a random song from the spotify API using user intput of genre and year
+def get_random_songAPI(spotify, type, genre, year): 
+    if year:
+        random_songAPI = spotify.recommendations(seed_genres = [genre], target_year = year, limit = 1) 
+    else:
+        random_songAPI = spotify.recommendations(seed_genres = [genre], limit = 1)
+    print(random_songAPI['tracks'][0]['name'])
+    
+
+
+    return random_songAPI
 
     

@@ -116,6 +116,7 @@ def get_track_by_genre(genre, sp):
     # set seed genre
     seed_genres = [genre]
 
+    
     # get recommendations based on seed genres
     results = sp.recommendations(seed_genres=seed_genres, limit=1)
 
