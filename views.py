@@ -388,6 +388,9 @@ def randomsong():
     random_song_artist = ""
     random_song_uri = ""
     random_song_link = ""
+    appendedtracks = []
+    tracks = []
+    x = 0
     #genre_name = ""
     #year_name = ""
     sp = spotipy.Spotify(auth=request.cookies.get("user"))      
@@ -405,15 +408,28 @@ def randomsong():
         popularity = request.form.get("popularity")
         
    
+        for x in range(0, 50):
+            results = sp.search(q=f"year:{year} genre:{genre}", type="track")
+            tracks = results["tracks"]["items"]
+            if popularity:
+                if tracks[x]["popularity"] > int(popularity):
+                    appendedtracks.append(tracks[x])
+                
+            x+1
         
-        results = sp.search(q=f"year:{year} genre:{genre}", type="track")
-        tracks = results["tracks"]["items"]
         
+        #put tracks in array test the popularity score of a track against the popularity input
+        #if the popularity score is greater than the input then add it to the array
+        #if popularity:
+            #for track in tracks:
+                #trackpop = track['popularity']
+                #if trackpop > int(popularity):
+                   # tracks.remove(track)
         
-    
-        
-    
-        track = random.choice(tracks)
+
+        track = random.choice(appendedtracks)
+        trackpop = track['popularity']
+        print(trackpop)
         print(track)
 
         # Get track title, artist, and cover art URL
