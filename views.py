@@ -1,4 +1,4 @@
-from flask import Blueprint, make_response, render_template, request,  redirect , session, url_for, flash
+from flask import Blueprint, jsonify, make_response, render_template, request,  redirect , session, url_for, flash
 import requests
 from SpotifyAPI import getartisttopten
 from SpotifyAPI import get_top_tracks, get_track_by_genre
@@ -390,8 +390,8 @@ def randomsong():
     random_song_link = ""
     #genre_name = ""
     #year_name = ""
-    spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
-    user = spotify.current_user()
+    sp = spotipy.Spotify(auth=request.cookies.get("user"))      
+    user = sp.current_user()
         
     try:
         profile_picture_url = user["images"][0]["url"]
@@ -400,12 +400,36 @@ def randomsong():
         profile_picture_url = url_for('static', filename='images/profilepicimages.png')
     
     if request.method == "POST":
-        
-        genre_name = request.form.get("genrename")
-        year_name = request.form.get("yearname")
+        genre = request.form.get("genrename")
+        year = request.form.get("yearname")
         popularity = request.form.get("popularity")
         
-        spotify_client = spotipy.Spotify(auth=request.cookies.get("user"))
+   
+        
+        results = sp.search(q=f"year:{year} genre:{genre}", type="track")
+        tracks = results["tracks"]["items"]
+        
+        
+    
+        
+    
+        track = random.choice(tracks)
+        print(track)
+
+        # Get track title, artist, and cover art URL
+        title = track["name"]
+        artist = track["artists"][0]["name"]
+        cover_art = track["album"]["images"][0]["url"]
+        track_id = track['id']
+        track_uri = 'spotify:track:' + track_id
+        track_link = f'https://open.spotify.com/track/{track_id}'
+        
+        return render_template('randomsong.html', genre_song = title, album_art = cover_art, artist_name = artist, link = track_link, profile_picture_url = profile_picture_url)
+    
+    else:
+        return render_template("randomsong.html")  
+
+"""
         if year_name and popularity:
             #replace get_random with spotifyAPI function    
             random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name, year = year_name, popularity = popularity)  
@@ -428,8 +452,8 @@ def randomsong():
         random_song_uri = 'spotify:track:' + random_song_id
         random_song_link = f'https://open.spotify.com/track/{random_song_id}'
         
-        
-    return render_template('randomsong.html', genre_song = random_song_name, album_art = random_song_art, artist_name = random_song_artist, link = random_song_link, profile_picture_url = profile_picture_url)
+     
+    
 
 #add parameter for popularity
 def get_random_songAPI(spotify, type, genre, year, popularity): 
@@ -446,5 +470,5 @@ def get_random_songAPI(spotify, type, genre, year, popularity):
 
 
     return random_songAPI
-
     
+"""
