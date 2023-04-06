@@ -406,14 +406,23 @@ def randomsong():
         
    
         
-        results = sp.search(q=f"year:{year} genre:{genre}", type="track")
+        results = sp.search(q=f"year:{year} genre:{genre}", type="track", limit=50)
         tracks = results["tracks"]["items"]
         
+        popularity_values = [track['popularity'] for track in tracks]
+        print(popularity_values)
+        
+
+        # Find index of track with closest popularity value to user input
+        index = min(range(len(popularity_values)), key=lambda i: abs(popularity_values[i]-int(popularity)))
+
+        # Return track with closest popularity value
+        track = tracks[index]
         
     
         
     
-        track = random.choice(tracks)
+        
         print(track)
 
         # Get track title, artist, and cover art URL
@@ -428,47 +437,3 @@ def randomsong():
     
     else:
         return render_template("randomsong.html")  
-
-"""
-        if year_name and popularity:
-            #replace get_random with spotifyAPI function    
-            random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name, year = year_name, popularity = popularity)  
-            #random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name, year = year_name)
-        elif year_name:
-            random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name, year = year_name)
-        elif popularity:
-            random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name, popularity = popularity)   
-        else:
-            random_song = get_random_songAPI(spotify = spotify_client, type = "track", genre = genre_name)
-
-            #random_song = get_random(spotify = spotify_client, type = "track", genre = genre_name)
-        
-        random_song_name = random_song['tracks'][0]['name']
-        random_song_art = random_song['tracks'][0]['album']['images'][0]['url']
-        random_song_artist = random_song['tracks'][0]['artists'][0]['name']
-        #random_song_uri = random_song['uri']
-        
-        random_song_id = random_song['tracks'][0]['id']
-        random_song_uri = 'spotify:track:' + random_song_id
-        random_song_link = f'https://open.spotify.com/track/{random_song_id}'
-        
-     
-    
-
-#add parameter for popularity
-def get_random_songAPI(spotify, type, genre, year, popularity): 
-    if year and popularity:
-        random_songAPI = spotify.recommendations(seed_genres = [genre], target_year = year, limit = 1, min_popularity = popularity) 
-    elif year:
-        random_songAPI = spotify.recommendations(seed_genres = [genre], target_year = year, limit = 1)
-    elif popularity:
-        random_songAPI = spotify.recommendations(seed_genres = [genre], limit = 1, min_popularity = popularity)
-    else:
-        random_songAPI = spotify.recommendations(seed_genres = [genre], limit = 1)
-    print(random_songAPI['tracks'][0]['name'])
-    
-
-
-    return random_songAPI
-    
-"""
