@@ -347,3 +347,22 @@
   left: 4em;
   text-shadow: green;
 }
+
+.recosong{
+  position: absolute;
+  top: 25em;
+  left: 40em;
+  text-shadow: green;
+}
+
+.playlistbutton{
+  position: absolute;
+  top: 2.5em;
+  left: 38em;
+}
+
+.playlistname{
+  position: absolute;
+  top: 2.5em;
+  left: 24em;
+}

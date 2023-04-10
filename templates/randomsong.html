@@ -57,16 +57,24 @@
     
       </h2>
 
-
+      <div class = "recosong">
       {% if recommended_songs %}
+          <button type="submit" class="playlistbutton">Create Playlist</button>
+          <input type="text" id="playlistbutton" name="playlistbutton" placeholder="Enter a Playlistname" class="playlistname">
+
           <h2>Recommended Songs:</h2>
           <ul>
               {% for song in recommended_songs %}
-                  <li>{{ song.title }} by {{ song.artist }}</li>
+                <li>
+                <label>
+                <input type="checkbox" name="song" value="{{ song.title }}">
+                  {{ song.title }} by {{ song.artist }}
+                </label>
+              </li>
               {% endfor %}
           </ul>
       {% endif %}
-      
+    </div>
 
     {% endblock %}
     </body>
