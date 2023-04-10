@@ -458,4 +458,4 @@ def randomsong():
         return render_template('randomsong.html', genre_song = title, album_art = cover_art, artist_name = artist, link = track_link, profile_picture_url = profile_picture_url, recommended_songs=recommended_songs)
     
     else:
-        return render_template("randomsong.html")  
+        return render_template("randomsong.html", profile_picture_url = profile_picture_url)  

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/randomsong.css')}}">>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/randomsong.css')}}">
     
     <title>Find a Song</title>
 </head>
@@ -58,6 +58,14 @@
       </h2>
 
 
+      {% if recommended_songs %}
+          <h2>Recommended Songs:</h2>
+          <ul>
+              {% for song in recommended_songs %}
+                  <li>{{ song.title }} by {{ song.artist }}</li>
+              {% endfor %}
+          </ul>
+      {% endif %}
       
 
     {% endblock %}
