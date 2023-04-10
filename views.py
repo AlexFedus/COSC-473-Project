@@ -17,7 +17,7 @@ our site.
 
 """
 
-
+recommended_songs = []
 test = []
 finalTrackList = []
 
@@ -56,6 +56,7 @@ def get_spotify_object(token):
 #The route that displays our homepage
 @views.route("/")
 def home():
+    recommended_songs.clear()
     if not request.cookies.get("user"):
         return render_template("home.html")
     
@@ -86,6 +87,7 @@ def home():
 
 @views.route("/artist", methods =["GET", "POST"])
 def artist():
+        recommended_songs.clear()
     
 
 
@@ -125,6 +127,7 @@ It utilizes our client id and secret to gain an access token
 """
 @views.route('/spotifyLogin')
 def loginsp():
+    recommended_songs.clear()
     sp_oauth = SpotifyOAuth(
         client_id=SPOTIPY_CLIENT_ID,
         client_secret=SPOTIPY_CLIENT_SECRET,
@@ -172,6 +175,7 @@ def loginsp():
 # Callback route
 @views.route('/callback')
 def callback():
+    recommended_songs.clear()
     
     
     auth_code = request.args.get('code')
@@ -261,6 +265,7 @@ def callback():
 
 @views.route('/liked-songs')
 def liked_songs():
+    recommended_songs.clear()
     user_id = session.get('user_id')
     if not user_id:
         # If the user is not logged in, redirect them to the login page
@@ -321,6 +326,7 @@ def liked_songs():
 # Clears the cookie to logout            
 @views.route('/logout')
 def logout():
+    recommended_songs.clear()
     resp = make_response(redirect('/'))
     resp.set_cookie('session', '', expires=0)
     return resp
@@ -329,6 +335,7 @@ def logout():
 #Gets the users top songs from each of the three terms that the spotify api allows
 @views.route('/mytop')
 def topusersongs():
+    recommended_songs.clear()
     
     
     spotify = spotipy.Spotify(auth=request.cookies.get("user"))
@@ -357,6 +364,7 @@ def topusersongs():
 #Gets a users top artists
 @views.route('/mytopartists')
 def topuserartists():
+    recommended_songs.clear()
     
     spotify = spotipy.Spotify(auth=request.cookies.get("user"))
     
@@ -410,7 +418,7 @@ def randomsong():
         tracks = results["tracks"]["items"]
         
         popularity_values = [track['popularity'] for track in tracks]
-        print(popularity_values)
+        
         
 
         # Find index of track with closest popularity value to user input
@@ -419,11 +427,13 @@ def randomsong():
         # Return track with closest popularity value
         track = tracks[index]
         
-    
+     
+        
+        
         
     
         
-        print(track)
+        
 
         # Get track title, artist, and cover art URL
         title = track["name"]
@@ -433,7 +443,19 @@ def randomsong():
         track_uri = 'spotify:track:' + track_id
         track_link = f'https://open.spotify.com/track/{track_id}'
         
-        return render_template('randomsong.html', genre_song = title, album_art = cover_art, artist_name = artist, link = track_link, profile_picture_url = profile_picture_url)
+        
+        song_details = {
+            'title': title,
+            'artist': artist,
+            'cover_art': cover_art,
+            'link': track_link
+        }
+        recommended_songs.append(song_details)
+        
+        print(recommended_songs)
+        
+        
+        return render_template('randomsong.html', genre_song = title, album_art = cover_art, artist_name = artist, link = track_link, profile_picture_url = profile_picture_url, recommended_songs=recommended_songs)
     
     else:
         return render_template("randomsong.html")  
