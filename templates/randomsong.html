@@ -27,7 +27,7 @@
         <label for="popularityname" class="label13">Enter a Popularity Score:</label>
         <input type="text" id="popularityname" name="popularityname" placeholder="Popularity Score 0-100" class="textInput3">
         -->
-        <button type="submit" class="searchbutton">Search</button>
+        <button type="submit" class="searchbutton" name="form1">Search</button>
       </form>
 
       
@@ -59,20 +59,22 @@
 
       <div class = "recosong">
       {% if recommended_songs %}
-          <button type="submit" class="playlistbutton">Create Playlist</button>
-          <input type="text" id="playlistbutton" name="playlistbutton" placeholder="Enter a Playlistname" class="playlistname">
+          <form action="{{ url_for('views.randomsong')}}" method="post">
+              <button type="submit" class="playlistbutton" name="form2">Create Playlist</button>
+              <input type="text" id="playlistbutton" name="playlistbutton" placeholder="Enter a Playlistname" class="playlistname">
 
-          <h2>Recommended Songs:</h2>
-          <ul>
-              {% for song in recommended_songs %}
-                <li>
-                <label>
-                <input type="checkbox" name="song" value="{{ song.title }}">
-                  {{ song.title }} by {{ song.artist }}
-                </label>
-              </li>
-              {% endfor %}
-          </ul>
+              <h2>Recommended Songs:</h2>
+              <ul>
+                  {% for song in recommended_songs %}
+                    <li>
+                    <label>
+                    <input type="checkbox" name="song" value="{{ song.title }}">
+                      {{ song.title }} by {{ song.artist }}
+                    </label>
+                  </li>
+                  {% endfor %}
+              </ul>
+          </form>
       {% endif %}
     </div>
 

@@ -25,7 +25,7 @@ finalTrackList = []
 SPOTIPY_CLIENT_ID = '83c609c1ed86447ebc5d4ffd526f9730'
 SPOTIPY_CLIENT_SECRET = 'ae50126def9a4e96a344385597ab9443'
 SPOTIPY_REDIRECT_URI = 'http://127.0.0.1:8000/callback'
-SCOPE = 'user-library-read user-read-email user-top-read user-read-private'
+SCOPE = 'user-library-read user-read-email user-top-read user-read-private playlist-modify-public playlist-modify-private'
 
 
 views = Blueprint(__name__,"views")
@@ -133,6 +133,7 @@ def loginsp():
         client_secret=SPOTIPY_CLIENT_SECRET,
         redirect_uri=SPOTIPY_REDIRECT_URI,
         scope='user-library-read user-read-email user-top-read user-read-private'
+        #user-library-read user-read-email user-top-read user-read-private playlist-modify-public playlist-modify-private
     )
 
     #Requesting a code and turning it into a token
@@ -400,6 +401,7 @@ def randomsong():
     #year_name = ""
     sp = spotipy.Spotify(auth=request.cookies.get("user"))      
     user = sp.current_user()
+    user_id = user["id"]
         
     try:
         profile_picture_url = user["images"][0]["url"]
@@ -408,54 +410,75 @@ def randomsong():
         profile_picture_url = url_for('static', filename='images/profilepicimages.png')
     
     if request.method == "POST":
-        genre = request.form.get("genrename")
-        year = request.form.get("yearname")
-        popularity = request.form.get("popularity")
-        
-   
-        
-        results = sp.search(q=f"year:{year} genre:{genre}", type="track", limit=50)
-        tracks = results["tracks"]["items"]
-        
-        popularity_values = [track['popularity'] for track in tracks]
-        
-        
-
-        # Find index of track with closest popularity value to user input
-        index = min(range(len(popularity_values)), key=lambda i: abs(popularity_values[i]-int(popularity)))
-
-        # Return track with closest popularity value
-        track = tracks[index]
-        
-     
-        
-        
-        
+        if 'form1' in request.form:
+            genre = request.form.get("genrename")
+            year = request.form.get("yearname")
+            popularity = request.form.get("popularity")
+            
     
+            
+            results = sp.search(q=f"year:{year} genre:{genre}", type="track", limit=50)
+            tracks = results["tracks"]["items"]
+            
+            popularity_values = [track['popularity'] for track in tracks]
+            
+            
+
+            # Find index of track with closest popularity value to user input
+            index = min(range(len(popularity_values)), key=lambda i: abs(popularity_values[i]-int(popularity)))
+
+            # Return track with closest popularity value
+            track = tracks[index]
+            
         
+            
+            
+            
+        
+            
+            
+
+            # Get track title, artist, and cover art URL
+            title = track["name"]
+            artist = track["artists"][0]["name"]
+            cover_art = track["album"]["images"][0]["url"]
+            track_id = track['id']
+            track_uri = 'spotify:track:' + track_id
+            track_link = f'https://open.spotify.com/track/{track_id}'
+            
+            
+            song_details = {
+                'title': title,
+                'artist': artist,
+                'cover_art': cover_art,
+                'link': track_link
+            }
+            recommended_songs.append(song_details)
+            
+            print(recommended_songs)
+            
+            
+            return render_template('randomsong.html', genre_song = title, album_art = cover_art, artist_name = artist, link = track_link, profile_picture_url = profile_picture_url, recommended_songs=recommended_songs)
         
 
-        # Get track title, artist, and cover art URL
-        title = track["name"]
-        artist = track["artists"][0]["name"]
-        cover_art = track["album"]["images"][0]["url"]
-        track_id = track['id']
-        track_uri = 'spotify:track:' + track_id
-        track_link = f'https://open.spotify.com/track/{track_id}'
-        
-        
-        song_details = {
-            'title': title,
-            'artist': artist,
-            'cover_art': cover_art,
-            'link': track_link
-        }
-        recommended_songs.append(song_details)
-        
-        print(recommended_songs)
-        
-        
-        return render_template('randomsong.html', genre_song = title, album_art = cover_art, artist_name = artist, link = track_link, profile_picture_url = profile_picture_url, recommended_songs=recommended_songs)
-    
+        elif 'form2' in request.form:
+            
+            selected_songs = request.form.getlist('song')
+            playlist_name = request.form.get('playlistbutton')
+            
+            playlist = sp.user_playlist_create(user=user_id, name=playlist_name, public=False)
+
+            # Add the selected songs to the playlist
+            song_uris = []
+            for song in selected_songs:
+                result = sp.search(q=song, type='track')
+                if len(result['tracks']['items']) > 0:
+                    track_uri = result['tracks']['items'][0]['uri']
+                    song_uris.append(track_uri)
+
+            sp.playlist_add_items(playlist_id=playlist['id'], items=song_uris)    
+            
+            return render_template("randomsong.html", profile_picture_url = profile_picture_url)
+            
     else:
         return render_template("randomsong.html", profile_picture_url = profile_picture_url)  
