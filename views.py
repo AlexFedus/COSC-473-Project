@@ -132,8 +132,8 @@ def loginsp():
         client_id=SPOTIPY_CLIENT_ID,
         client_secret=SPOTIPY_CLIENT_SECRET,
         redirect_uri=SPOTIPY_REDIRECT_URI,
-        scope='user-library-read user-read-email user-top-read user-read-private'
-        #user-library-read user-read-email user-top-read user-read-private playlist-modify-public playlist-modify-private
+        #scope='user-library-read user-read-email user-top-read user-read-private'
+        scope='user-library-read user-read-email user-top-read user-read-private playlist-modify-public playlist-modify-private'
     )
 
     #Requesting a code and turning it into a token
