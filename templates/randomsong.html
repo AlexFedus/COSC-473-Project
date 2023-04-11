@@ -60,9 +60,9 @@
       <div class = "recosong">
       {% if recommended_songs %}
           <form action="{{ url_for('views.randomsong')}}" method="post">
-              <button type="submit" class="playlistbutton" name="form2">Create Playlist</button>
+              <button type="submit" class="playlistbutton" name="form2" >Create Playlist</button>
               <input type="text" id="playlistbutton" name="playlistbutton" placeholder="Enter a Playlistname" class="playlistname">
-
+              
               <h2>Recommended Songs:</h2>
               <ul>
                   {% for song in recommended_songs %}

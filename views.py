@@ -477,7 +477,7 @@ def randomsong():
                     song_uris.append(track_uri)
 
             sp.playlist_add_items(playlist_id=playlist['id'], items=song_uris)    
-            
+            flash("Playlist created successfully!", category="success")
             return render_template("randomsong.html", profile_picture_url = profile_picture_url)
             
     else:
