@@ -40,12 +40,12 @@
         <!--<image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class= "threelines">-->
         {% endblock %}
         {% block code %}
-        <div class = "artistbox">Search For an Artist's Top Songs 
+        <div class = "artistbox"> 
             <h1 class="topTen">Search For an Artist's Top 10 Songs</h1>
             <form action="{{ url_for('views.artist')}}" method="post">
-                <label for="artistname" class="label1">Enter an Artist:</label>
-                <input type="text" id="artistname" name="aname" placeholder="Enter a artist" class="textInput">
-                <button type="submit" class="searchbutton">Search</button>
+                <label for="artistname" class="label1A">Enter an Artist:</label>
+                <input type="text" id="artistname" name="aname" placeholder="Enter a artist" class="textInputArtist">
+                <button type="submit" class="searchbuttonArtist">Search</button>
             </form>
         
             <h2 class = "artistSongs">

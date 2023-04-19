@@ -86,25 +86,7 @@
   }
 
   /* Artist songs css */
-  .searchbutton {
-    position: absolute;
-    top: 20%;
-    left: 300px;
-    padding: 10px 20px;
-    border-radius: 7px;
-    border: 1px solid rgb(0, 0, 0);
-    font-size: 14px;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 2px;
-    background-color: #0a0a0a;
-    color: #fff;
-    overflow: hidden;
-    box-shadow: 0 0 0 0 transparent;
-    -webkit-transition: all 0.2s ease-in;
-    -moz-transition: all 0.2s ease-in;
-    transition: all 0.2s ease-in;
-  }
+
 
   .threelines{
     position: relative;
@@ -123,10 +105,10 @@
     left: 5em;
   }
 
-  .label1{
+  .label1A{
     position: absolute;
     top: 18%;
-    left: 4em;
+    left: 30em;
   }
 
 .artistbox {
@@ -138,35 +120,13 @@
 
 .topTen {
   font-size: 32px;
-  margin-top: 0;
+  margin-top: 30px;
   margin-bottom: 20px;
 }
 
-.label1 {
-  font-size: 20px;
-  display: block;
-  margin-bottom: 10px;
-}
 
-.textInput {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  width: 60%;
-  margin-bottom: 20px;
-}
 
-.searchbutton {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 4px;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  margin-left: 10px;
-}
+
 
 /* Apply styles to the artistSongs */
 /* Apply styles to the artistbox */
@@ -177,19 +137,10 @@
   text-align: center;
 }
 
-.topTen {
-  font-size: 32px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
 
-.label1 {
-  font-size: 20px;
-  display: block;
-  margin-bottom: 10px;
-}
 
-.textInput {
+
+.textInputArtist {
   display: inline-block;
   width: 20%;
   padding: 12px 20px;
@@ -197,9 +148,10 @@
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
+  top: 16%;
 }
 
-.searchbutton {
+.searchbuttonArtist {
   display: inline-block;
   width: 15%;
   background-color: #4CAF50;
@@ -209,10 +161,10 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: 200px;
+  margin-left: 100px;
 }
 
-.searchbutton:hover {
+.searchbuttonAritst:hover {
   background-color: #45a049;
 }
 
