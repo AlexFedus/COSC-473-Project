@@ -129,23 +129,108 @@
     left: 4em;
   }
 
-  .topTen{
-    position: absolute;
-    top: 27%;
-    width: 500px;
-    border-style: solid;
-      border-width: 0.2ch;
-      border-radius: 0.1ch;
-      background-color: green;
-      color: aliceblue;
-      width: 15cm;
-      text-align: center;
-  }
+.artistbox {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
 
-  .artistSongs{
-    position: absolute;
-    top: 35%;
-  }
+.topTen {
+  font-size: 32px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.label1 {
+  font-size: 20px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.textInput {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 60%;
+  margin-bottom: 20px;
+}
+
+.searchbutton {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Apply styles to the artistSongs */
+/* Apply styles to the artistbox */
+.artistbox {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.topTen {
+  font-size: 32px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.label1 {
+  font-size: 20px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.textInput {
+  display: inline-block;
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.searchbutton {
+  display: inline-block;
+  width: 15%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 200px;
+}
+
+.searchbutton:hover {
+  background-color: #45a049;
+}
+
+/* Apply styles to the artistSongs */
+.artistSongs {
+  font-size: 20px;
+  margin-top: 150px;
+  text-align: left;
+}
+
+.topsongs {
+  margin: 0;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
   
   /* User Top css */
   .short {

@@ -40,19 +40,21 @@
         <!--<image src="{{ url_for('static', filename='images/Spotifythreelines.png')}}" class= "threelines">-->
         {% endblock %}
         {% block code %}
-        <h1 class="topTen">Top 10 Songs</h1>
-        <form action="{{ url_for('views.artist')}}" method="post">
-            <label for="artistname" class="label1">Enter an Artist:</label>
-            <input type="text" id="artistname" name="aname" placeholder="Enter a artist" class="textInput">
-            <button type="submit" class="searchbutton">Search</button>
-        </form>
+        <div class = "artistbox">Search For an Artist's Top Songs 
+            <h1 class="topTen">Search For an Artist's Top 10 Songs</h1>
+            <form action="{{ url_for('views.artist')}}" method="post">
+                <label for="artistname" class="label1">Enter an Artist:</label>
+                <input type="text" id="artistname" name="aname" placeholder="Enter a artist" class="textInput">
+                <button type="submit" class="searchbutton">Search</button>
+            </form>
         
-        <h2 class = "artistSongs">
-        {% for your_list_element in your_list %}
-            <p class= "topsongs">{{ your_list_element }} </p>
+            <h2 class = "artistSongs">
+            {% for your_list_element in your_list %}
+                <p class= "topsongs">{{ your_list_element }} </p>
       
-        {% endfor %}
-        </h2>
+            {% endfor %}
+            </h2>
+        </div> 
         {% endblock %}
         
     
