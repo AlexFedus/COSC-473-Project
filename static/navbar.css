@@ -106,9 +106,9 @@
   }
 
   .label1A{
-    position: absolute;
+    position: relative;
     top: 18%;
-    left: 30em;
+    left: 0em;
   }
 
 .artistbox {
@@ -282,14 +282,36 @@
   display: block;
 }
 
+.tracklist {
+  columns: 3;
+}
 .topfifty {
+  
   top: 5em;
   left: 5em;
+  
+ 
 }
 
 .trackfifty{
+  
   top: 6em;
   left: 6em;
+  
+  
+}
+
+.fiftytrack {
+  
+  font-size: 20px;
+  
+  text-align: left;
+  
+  
+  background-color: #fff;
+  border-radius: 2px;
+  border: 0px solid #ccc;
+  margin-bottom: 5px;
 }
 
 .genresongs{
