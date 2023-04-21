@@ -17,7 +17,8 @@ app = Flask(__name__)
 
 app.secret_key = "0afafa34v"
 #capp.config['SESSION_TYPE'] = 'filesystem'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sql9598812:uJVAVztfRj@sql9.freesqldatabase.com:3306/sql9598812'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sql9598812:uJVAVztfRj@sql9.freesqldatabase.com:3306/sql9598812'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://freedb_cosc473:uQzS965UXf8M&s?@sql.freedb.tech/freedb_Cosc473'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
