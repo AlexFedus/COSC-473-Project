@@ -16,7 +16,7 @@
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
     {% endblock %}
     {% block code %}
-    <form action="{{ url_for('views.randomsong')}}" method="post">
+    <form class="formrs" action="{{ url_for('views.randomsong')}}" method="post">
         <label for="genrename" class="label1">Enter a Genre:</label>
         <input type="text" id="genrename" name="genrename" placeholder="Enter a Genre" class="textInput">
         <label for="yearname" class="label12">Enter a Year:</label>
@@ -27,7 +27,7 @@
         <label for="popularityname" class="label13">Enter a Popularity Score:</label>
         <input type="text" id="popularityname" name="popularityname" placeholder="Popularity Score 0-100" class="textInput3">
         -->
-        <button type="submit" class="searchbutton" name="form1">Search</button>
+        <button type="submit" class="searchbuttonrs" name="form1">Search</button>
       </form>
 
       

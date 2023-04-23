@@ -440,3 +440,23 @@
   left: 24em;
 }
 
+
+.label1{
+  position: absolute;
+  top: 18%;
+  left: 4em;
+
+}
+
+.searchbuttonrs{
+  height: 30px;
+  width: 200px;
+  margin-top: 25em;
+  margin-left: 3em;
+}
+
+.errorpageBox{
+  margin-top: 80px;
+  align-items: center;
+  text-align: center;
+}
