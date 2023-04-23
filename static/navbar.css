@@ -418,3 +418,8 @@
   left: 24em;
 }
 
+.errorpageBox{
+  margin-top: 80px;
+  align-items: center;
+  text-align: center;
+}

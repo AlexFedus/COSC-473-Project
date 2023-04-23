@@ -88,31 +88,37 @@ def home():
 @views.route("/artist", methods =["GET", "POST"])
 def artist():
         recommended_songs.clear()
+        spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
+        user = spotify.current_user()
     
-
+        try:
+            profile_picture_url = user["images"][0]["url"]
+        
+        except:
+            profile_picture_url = url_for('static', filename='images/profilepicimages.png')
 
         if request.method == "POST":
         #checks if access token is expired and gets a refreshed token and check if it has token data
         
        # getting input with name = fname in HTML form
+            
             artist_name = request.form.get("aname")
+            
        # getting input with name = lname in HTML form
-            songs = getartisttopten(artist_name)
+            try:
+                songs = getartisttopten(artist_name)
         
+            except:
+                return render_template("error.html",profile_picture_url= profile_picture_url)
        
             test.clear()
        
             for idx, song in enumerate(songs):
                 test.append(f"{idx + 1}. {song['name']}")
                 
-        spotify = spotipy.Spotify(auth=request.cookies.get("user"))      
-        user = spotify.current_user()
         
-        try:
-            profile_picture_url = user["images"][0]["url"]
         
-        except:
-            profile_picture_url = url_for('static', filename='images/profilepicimages.png')
+        
         
         
            
@@ -482,3 +488,16 @@ def randomsong():
             
     else:
         return render_template("randomsong.html", profile_picture_url = profile_picture_url)  
+
+
+@views.errorhandler(KeyError)
+def handle_key_error(error):
+    sp = spotipy.Spotify(auth=request.cookies.get("user"))      
+    user = sp.current_user()
+        
+    try:
+        profile_picture_url = user["images"][0]["url"]
+        
+    except:
+        profile_picture_url = url_for('static', filename='images/profilepicimages.png')
+    return render_template("error.html", profile_picture_url = profile_picture_url)
