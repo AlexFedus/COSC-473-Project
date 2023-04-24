@@ -414,24 +414,21 @@
   text-shadow: green;
 }
 
-.playlistbutton{
-  position: absolute;
-  top: 2.5em;
-  left: 38em;
-  padding: 10px 20px;
-  border-radius: 7px;
-  border: 1px solid rgb(0, 0, 0);
-  font-size: 14px;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 2px;
-  background-color: #0a0a0a;
-  color: #fff;
-  overflow: hidden;
-  box-shadow: 0 0 0 0 transparent;
-  -webkit-transition: all 0.2s ease-in;
-  -moz-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
+.playlistbutton {
+  display: inline-block;
+  width: 200px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 550px;
+}
+
+.playlistbutton:hover {
+  background-color: #45a049;
 }
 
 .playlistname{
@@ -448,12 +445,33 @@
 
 }
 
-.searchbuttonrs{
+
+  /*
   height: 30px;
   width: 200px;
   margin-top: 25em;
   margin-left: 3em;
-}
+  */
+.searchbuttonrs {
+
+   display: inline-block;
+   height: 60px;
+   width: 200px;
+   left: 20em;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin-top: 18em;
+    margin-left: 3em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 45px;
+  }
+  
+  .searchbuttonrs:hover {
+    background-color: #45a049;
+  } 
 
 .formrs{
   width: 50%;
@@ -468,8 +486,26 @@
 
 
 
+
 .errorpageBox{
   margin-top: 80px;
   align-items: center;
   text-align: center;
+}
+
+.anysongsearch {
+  display: inline-block;
+  width: 15%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 100px;
+}
+
+.anysongsearch:hover {
+  background-color: #45a049;
 }
