@@ -465,6 +465,31 @@ def randomsong():
             
             return render_template('randomsong.html', genre_song = title, album_art = cover_art, artist_name = artist, link = track_link, profile_picture_url = profile_picture_url, recommended_songs=recommended_songs)
         
+        elif 'form1b' in request.form:
+            song_search = request.form.get('anysonginput')
+            
+            searchresults = sp.search(q=song_search, type='track')
+            strack = searchresults['tracks']['items'][0]
+            
+            title = strack["name"]
+            artist = strack["artists"][0]["name"]
+            cover_art = strack["album"]["images"][0]["url"]
+            track_id = strack['id']
+            track_uri = 'spotify:track:' + track_id
+            track_link = f'https://open.spotify.com/track/{track_id}'
+            
+            song_details = {
+                'title': title,
+                'artist': artist,
+                'cover_art': cover_art,
+                'link': track_link
+            }
+            recommended_songs.append(song_details)
+            
+            print(recommended_songs)
+            
+            return render_template('randomsong.html', genre_song = title, album_art = cover_art, artist_name = artist, link = track_link, profile_picture_url = profile_picture_url, recommended_songs=recommended_songs)
+            
 
         elif 'form2' in request.form:
             

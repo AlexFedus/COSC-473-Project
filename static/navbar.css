@@ -437,7 +437,7 @@
 .playlistname{
   position: absolute;
   top: 2.5em;
-  left: 24em;
+  left: 25em;
 }
 
 
@@ -454,6 +454,19 @@
   margin-top: 25em;
   margin-left: 3em;
 }
+
+.formrs{
+  width: 50%;
+  float: left;
+}
+
+.anysong{
+  width: 50%;
+  float: right;
+  padding-top: 6em;
+}
+
+
 
 .errorpageBox{
   margin-top: 80px;

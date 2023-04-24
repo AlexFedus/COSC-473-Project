@@ -30,6 +30,11 @@
         <button type="submit" class="searchbuttonrs" name="form1">Search</button>
       </form>
 
+      <form class = "anysong" action="{{ url_for('views.randomsong')}}" method="post">
+        <label for ="songname" class = anysonglabel>Search for any Song:</label>
+        <input type ="text" class = anysonginput name="anysonginput" placeholder="Enter a song title">
+        <button type="submit" class="anysongsearch" name="form1b">Search</button>
+      </form>
       
 
 
