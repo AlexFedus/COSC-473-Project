@@ -132,8 +132,8 @@
 /* Apply styles to the artistbox */
 .artistbox {
   position: absolute;
-  top: 25em;
-  left: 50%;
+  top: 5em;
+  left: 40%;
   max-width: 800px;
   margin: 0 auto;
   padding: 40px 20px;
