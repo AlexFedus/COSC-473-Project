@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
 import datetime
 from datetime import timedelta
+from spotipy.exceptions import SpotifyException
 from spotipy_random import get_random
 import random
 
@@ -519,6 +520,8 @@ def randomsong():
 @views.errorhandler(ValueError)
 @views.errorhandler(TypeError)
 @views.errorhandler(AttributeError)
+@views.errorhandler(404)
+@views.errorhandler(SpotifyException)
 
 def handle_key_error(error):
     sp = spotipy.Spotify(auth=request.cookies.get("user"))      
