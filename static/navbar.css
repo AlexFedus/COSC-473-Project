@@ -131,6 +131,9 @@
 /* Apply styles to the artistSongs */
 /* Apply styles to the artistbox */
 .artistbox {
+  position: absolute;
+  top: 25em;
+  left: 50%;
   max-width: 800px;
   margin: 0 auto;
   padding: 40px 20px;
@@ -316,17 +319,23 @@
 
 .genresongs{
   position: absolute;
-  top: 30em;
-  left: 4em;
-  text-shadow: green;
-  text-decoration: solid;
-  text-decoration-color: green;
+  top: 56em;
+  left: 9em;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000000;
+  border: 1px solid #000000;
+  padding: 5px;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  padding: 5px;
+  border-radius: 4px;
 }
 
 .album-art{
   position: absolute;
-  top: 17em;
-  left: 5em;
+  top: 22em;
+  left: 4em;
   height: 10em;
   width: 10em;
   
@@ -337,9 +346,9 @@
   width: 11.7em;
 
   position: absolute;
-  top: 16em;
-  left: 4em;
-  background-color: green;
+  top: 21em;
+  left: 3em;
+  background-color: #4CAF50;
 
   border-radius: 10px;
   border-style: solid; 
@@ -414,7 +423,22 @@
   text-shadow: green;
 }
 
+
+.playlistbutton2 {
+    
+    display: inline-block;
+    width: 200px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  
+}
 .playlistbutton {
+  
   display: inline-block;
   width: 200px;
   background-color: #4CAF50;
@@ -424,7 +448,8 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: 550px;
+  margin-left: 135px;
+  margin-top: 105px;
 }
 
 .playlistbutton:hover {
@@ -455,13 +480,14 @@
 .searchbuttonrs {
 
    display: inline-block;
+   position: absolute;
    height: 60px;
-   width: 200px;
-   left: 20em;
+   width: 185px;
+   left: 6.4em;
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
-    margin-top: 18em;
+    margin-top: 30em;
     margin-left: 3em;
     border: none;
     border-radius: 4px;
@@ -494,8 +520,12 @@
 }
 
 .anysongsearch {
+  position: absolute;
+  top: 31em;
+  left: 43em;
   display: inline-block;
-  width: 15%;
+  height: 60px;
+  width: 185px;
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
@@ -509,3 +539,168 @@
 .anysongsearch:hover {
   background-color: #45a049;
 }
+
+.anysonginput {
+  position: absolute;
+  top: 13em;
+  left: 39em;
+  margin: 30px;
+  background: none;
+  background-color: #383838;
+  
+  border: none;
+  outline: none;
+  max-width: 190px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 9999px;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  color: #10c400;
+}
+
+.anysonginput::placeholder {
+  color: #10c400;
+  opacity: 1;
+}
+
+.popinp {
+  position: absolute;
+  top: 19em;
+  left: 5em;
+  margin: 30px;
+  background: none;
+  background-color: #383838;
+  
+  border: none;
+  outline: none;
+  max-width: 190px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 9999px;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  color: #10c400;
+}
+
+.popinp::placeholder {
+  color: #10c400;
+  opacity: 1;
+}
+
+.genreinp {
+  position: absolute;
+  top: 13em;
+  left: 5em;
+  margin: 30px;
+  background: none;
+  background-color: #383838;
+  
+  border: none;
+  outline: none;
+  max-width: 190px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 9999px;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  color: #10c400;
+}
+
+.genreinp::placeholder {
+  color: #10c400;
+  opacity: 1;
+}
+
+
+.yearinp {
+  position: absolute;
+  top: 16em;
+  left: 5em;
+  margin: 30px;
+  background: none;
+  background-color: #383838;
+  
+  border: none;
+  outline: none;
+  max-width: 190px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 9999px;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  color: #10c400;
+}
+
+.yearinp::placeholder {
+  color: #10c400;
+  opacity: 1;
+}
+
+.randomsongtitle{
+  position: absolute;
+  top: 10em;
+  left: 7em;
+}
+
+.orlabel {
+  position: absolute;
+  top: 10em;
+  left: 27em;
+}
+
+.anysonglabel{
+  position: absolute;
+  top: 10em;
+  left: 37em;
+}
+
+.pltlabel{
+  position: absolute;
+  top: 7em;
+  left: -2em;
+  font-size: 22px;
+  font-weight: bold;
+  color: #000000;
+  border: 1px solid #000000;
+  padding: 5px;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.pltracks {
+  position: absolute;
+  top: 13em;
+  left: -2.5em;
+  
+  
+}
+
+.songtitl {
+  position: absolute;
+  top: 10em;
+  left: 7em;
+}
+
+
+.playlistcreate {
+  position: absolute;
+  top: 5em;
+  left: -12em;
+  margin: 30px;
+  background: none;
+  background-color: #383838;
+  
+  border: none;
+  outline: none;
+  max-width: 190px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 9999px;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  color: #10c400;
+}
+
+.playlistcreate::placeholder {
+  color: #10c400;
+  opacity: 1;
+}
+

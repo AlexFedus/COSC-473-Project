@@ -17,12 +17,20 @@
     {% endblock %}
     {% block code %}
     <form class="formrs" action="{{ url_for('views.randomsong')}}" method="post">
+        <!--
         <label for="genrename" class="label1">Enter a Genre:</label>
-        <input type="text" id="genrename" name="genrename" placeholder="Enter a Genre" class="textInput">
+        -->
+        <label class = "randomsongtitle">Find a Random Song</label>
+        <label class = "orlabel">OR</label>
+        <input type="text" class = "genreinp" id="genrename" name="genrename" placeholder="Enter a Genre" class="textInput">
+        <!--
         <label for="yearname" class="label12">Enter a Year:</label>
-        <input type="number" id="yearname" name="yearname" placeholder="Enter a Year" class="textInput2">
+        -->
+        <input type="number" class = "yearinp" id="yearname" name="yearname" placeholder="Enter a Year" class="textInput2">
+        <!--
         <label for="popularity" class = "label21">Enter a popularity:</label>
-        <input type="number" id="popularity" name="popularity" placeholder="Enter a Popularity" class="textInput4">
+        -->
+        <input type="number" class = "popinp" id="popularity" name="popularity" placeholder="Enter a Popularity" class="textInput4">
         <!--
         <label for="popularityname" class="label13">Enter a Popularity Score:</label>
         <input type="text" id="popularityname" name="popularityname" placeholder="Popularity Score 0-100" class="textInput3">
@@ -31,8 +39,8 @@
       </form>
 
       <form class = "anysong" action="{{ url_for('views.randomsong')}}" method="post">
-        <label for ="songname" class = anysonglabel>Search for any Song:</label>
-        <input type ="text" class = anysonginput name="anysonginput" placeholder="Enter a song title">
+        <label for ="songname" class = "anysonglabel">Search for any Song:</label>
+        <input type ="text" class = "anysonginput" name="anysonginput" placeholder="Enter a song title">
         <button type="submit" class="anysongsearch" name="form1b">Search</button>
       </form>
       
@@ -66,15 +74,17 @@
       {% if recommended_songs %}
           <form action="{{ url_for('views.randomsong')}}" method="post">
               <button type="submit" class="playlistbutton" name="form2" >Create Playlist</button>
-              <input type="text" id="playlistbutton" name="playlistbutton" placeholder="Enter a Playlistname" class="playlistname">
+              <input type="text" class="playlistcreate" id="playlistbutton" name="playlistbutton" placeholder="Enter a Playlistname" class="playlistname">
               
-              <h2>Recommended Songs:</h2>
-              <ul>
+              <h2 class ="pltlabel">Current Playlist Tracks</h2>
+              <ul class = "pltracks">
                   {% for song in recommended_songs %}
                     <li>
                     <label>
-                    <input type="checkbox" name="song" value="{{ song.title }}">
+                    <input type="checkbox" class = "check" name="song" value="{{ song.title }}">
+                    
                       {{ song.title }} by {{ song.artist }}
+                    
                     </label>
                   </li>
                   {% endfor %}
